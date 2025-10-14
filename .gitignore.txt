@@ -1,0 +1,11 @@
+# Dependency and build folders
+node_modules
+dist
+
+# Environment files
+.env
+
+# Editor and OS files
+.vscode
+.DS_Store
+Thumbs.db

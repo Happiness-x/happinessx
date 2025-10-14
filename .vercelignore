@@ -1,0 +1,6 @@
+# Exclude private assets from Vercel deployments
+/private-assets
+
+# Node modules and build output
+node_modules
+dist
