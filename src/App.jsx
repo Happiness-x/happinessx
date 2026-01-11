@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
-import "aos/dist/aos.css";
 
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -16,14 +15,14 @@ export default function App() {
 
   return (
     <div className="relative bg-gradient-to-b from-black via-teal-900 to-black text-white font-serif scroll-smooth">
-      
-      {/* 🌌 Soft Aura Background */}
+
+      {/* Background glow */}
       <div className="absolute inset-0 bg-gradient-to-b from-cyan-800/10 via-transparent to-cyan-900/10 blur-3xl" />
 
-      {/* 🌙 Global Header */}
+      {/* Global Header */}
       <Header />
 
-      {/* 🏠 Home Page */}
+      {/* Home Page */}
       <Home />
 
     </div>
