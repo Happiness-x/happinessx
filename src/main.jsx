@@ -1,32 +1,33 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./index.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import App from "./App";
+import "./index.css";
+import "aos/dist/aos.css";
+
+import About from "./pages/About";
 import QuantumHealing from "./pages/QuantumHealing";
 import LearnMore from "./pages/LearnMore";
-import About from "./pages/About";
-import PageWrapper from "./components/PageWrapper";
 import Gallery from "./pages/Gallery";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+
 import ScrollToTop from "./components/ScrollToTop";
-import FloatingNav from "./components/FloatingNav";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-  <Router>
-  <ScrollToTop />
-  <FloatingNav />
-  <Routes>
-  <Route path="/" element={<PageWrapper><App /></PageWrapper>} />
-  <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
-  <Route path="/quantum-healing" element={<PageWrapper><QuantumHealing /></PageWrapper>} />
-  <Route path="/learn" element={<PageWrapper><LearnMore /></PageWrapper>} />
-  <Route path="/gallery" element={<PageWrapper><Gallery /></PageWrapper>} />
-  <Route path="/blog" element={<PageWrapper><Blog /></PageWrapper>} />
-  <Route path="/blog/:id" element={<PageWrapper><BlogPost /></PageWrapper>} />
+    <BrowserRouter>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/quantum-healing" element={<QuantumHealing />} />
+        <Route path="/learn" element={<LearnMore />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   </React.StrictMode>
 );
