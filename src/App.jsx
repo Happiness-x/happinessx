@@ -11,8 +11,6 @@ export default function App() {
     <div className="relative bg-gradient-to-b from-black via-teal-900 to-black text-white font-serif scroll-smooth">
       {/* 🌌 Soft Aura Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-cyan-800/10 via-transparent to-cyan-900/10 blur-3xl"></div>
-
-      
     </div>
   );
 }
