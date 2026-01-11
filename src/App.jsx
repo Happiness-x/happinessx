@@ -83,7 +83,7 @@ export default function App() {
               Book a Session
             </a>
             <a
-              href="https://wa.me/91877845559"
+              href="https://wa.me/918777845559"
               target="_blank"
               rel="noopener noreferrer"
               className="border border-cyan-500 text-cyan-200 px-6 py-3 rounded-lg hover:bg-cyan-700 hover:scale-105 transform transition"
@@ -310,12 +310,12 @@ export default function App() {
           <p>
             📞 Phone / WhatsApp:{" "}
             <a
-              href="https://wa.me/91877845559"
+              href="https://wa.me/918777845559"
               target="_blank"
               rel="noopener noreferrer"
               className="underline hover:text-cyan-300"
             >
-              +91 87784 5559
+              +91 877784 5559
             </a>
           </p>
           <p>
