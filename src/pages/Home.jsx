@@ -12,10 +12,17 @@ export default function Home() {
 
         <div className="relative z-10">
           <img
-            src="/logo.png"
-            alt="Happiness X"
-            className="w-28 h-28 mx-auto mb-4 drop-shadow-[0_0_20px_#06b6d4]"
-          />
+  src="/Golden-Eye-of-Ra-emblem.png"
+  alt="Happiness X Sacred Symbol"
+  className="
+    w-64 md:w-80 lg:w-96
+    mb-8
+    drop-shadow-[0_0_40px_rgba(255,200,120,0.6)]
+    animate-pulse
+  "
+  draggable={false}
+  onContextMenu={(e) => e.preventDefault()}
+/>
 
           <h1 className="text-5xl font-bold text-cyan-300">HAPPINESS X</h1>
           <p className="italic text-cyan-200 mt-3">
