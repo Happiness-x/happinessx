@@ -1,18 +1,17 @@
+import React from "react";
+
 export default function Header() {
   const navItems = [
     { label: "Home", href: "/" },
-    { label: "About", href: "/#about" },
-    { label: "Therapies", href: "/#sessions" },
+    { label: "About", href: "/about" },
     { label: "Quantum", href: "/quantum-healing" },
     { label: "Gallery", href: "/gallery" },
     { label: "Blog", href: "/blog" },
     { label: "Learning", href: "/learn" },
-    { label: "Booking", href: "/#booking" },
-    { label: "Contact", href: "/#contact" },
   ];
 
   return (
-    <nav className="fixed top-0 w-full bg-black/40 backdrop-blur-md text-cyan-200 py-4 px-6 flex justify-center space-x-8 border-b border-cyan-900 z-50">
+    <nav className="fixed top-0 w-full bg-black/60 backdrop-blur-md text-cyan-200 py-4 flex justify-center gap-8 z-50">
       {navItems.map((item) => (
         <a
           key={item.label}
