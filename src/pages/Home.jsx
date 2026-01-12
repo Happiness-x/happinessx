@@ -2,20 +2,22 @@ import React, { useEffect } from "react";
 
 export default function Home() {
   useEffect(() => {
-    // Ensure Calendly initializes after page load
-    if (window.Calendly) {
-      window.Calendly.initInlineWidget({
-        url: "https://calendly.com/happinessx",
-        parentElement: document.getElementById("calendly-embed"),
-        prefill: {},
-        utm: {},
-      });
-    }
+    const interval = setInterval(() => {
+      if (window.Calendly) {
+        window.Calendly.initInlineWidget({
+          url: "https://calendly.com/happinessx",
+          parentElement: document.getElementById("calendly-embed"),
+        });
+        clearInterval(interval);
+      }
+    }, 300);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <>
-      {/* 🌌 HERO SECTION */}
+      {/* 🌌 HERO */}
       <section
         id="home"
         className="min-h-screen pt-32 flex flex-col items-center justify-center text-center p-8 bg-[url('/healing-bg1.jpg')] bg-cover bg-center relative"
@@ -23,18 +25,11 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/70" />
 
         <div className="relative z-10 max-w-4xl">
-          {/* 🧿 Sacred Symbol */}
           <img
             src="/Golden-Eye-of-Ra-emblem.png"
             alt="Happiness X Sacred Symbol"
-            className="
-              w-64 md:w-80 lg:w-96
-              mx-auto mb-10
-              drop-shadow-[0_0_40px_rgba(255,200,120,0.6)]
-              animate-pulse
-            "
+            className="w-64 md:w-80 lg:w-96 mx-auto mb-10 drop-shadow-[0_0_40px_rgba(255,200,120,0.6)]"
             draggable={false}
-            onContextMenu={(e) => e.preventDefault()}
           />
 
           <h1 className="text-5xl md:text-6xl font-bold text-cyan-300">
@@ -51,7 +46,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 🗓️ CALENDLY BOOKING SECTION */}
+      {/* 🗓️ BOOKING */}
       <section
         id="booking"
         className="min-h-screen flex flex-col items-center justify-center text-center px-6 py-24 bg-black"
@@ -65,12 +60,11 @@ export default function Home() {
           consent, and professional integrity.
         </p>
 
-        {/* Calendly Embed */}
         <div
           id="calendly-embed"
           className="w-full max-w-4xl rounded-2xl overflow-hidden border border-cyan-900 shadow-[0_0_40px_rgba(0,200,200,0.15)]"
           style={{ minHeight: "700px" }}
-        ></div>
+        />
       </section>
     </>
   );
