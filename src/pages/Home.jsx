@@ -5,7 +5,7 @@ export default function Home() {
     // Ensure Calendly initializes after page load
     if (window.Calendly) {
       window.Calendly.initInlineWidget({
-        url: "https://calendly.com/YOUR_CALENDLY_USERNAME",
+        url: "https://calendly.com/happinessx",
         parentElement: document.getElementById("calendly-embed"),
         prefill: {},
         utm: {},
