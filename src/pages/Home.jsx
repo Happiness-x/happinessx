@@ -6,34 +6,26 @@ export default function Home() {
       {/* HERO */}
       <section
         id="home"
-        data-aos="fade-up"
-        className="min-h-screen pt-24 flex flex-col justify-center items-center text-center bg-black"
+        className="min-h-screen pt-24 flex flex-col items-center justify-center text-center p-8 bg-[url('/healing-bg1.jpg')] bg-cover bg-center relative"
       >
-        <h1 className="text-5xl text-cyan-400 mb-4">HAPPINESS X</h1>
-        <p className="text-gray-300 max-w-xl">
-          Healing for inner peace & balance
-        </p>
-      </section>
+        <div className="absolute inset-0 bg-black/70" />
 
-      {/* ABOUT */}
-      <section id="about" className="min-h-screen p-20 bg-black">
-        <h2 className="text-3xl text-cyan-400">The Energy Within</h2>
-      </section>
+        <div className="relative z-10">
+          <img
+            src="/logo.png"
+            alt="Happiness X"
+            className="w-28 h-28 mx-auto mb-4 drop-shadow-[0_0_20px_#06b6d4]"
+          />
 
-      {/* SESSIONS */}
-      <section id="sessions" className="min-h-screen p-20 bg-black">
-        <h2 className="text-3xl text-cyan-400">Sessions & Offerings</h2>
-      </section>
+          <h1 className="text-5xl font-bold text-cyan-300">HAPPINESS X</h1>
+          <p className="italic text-cyan-200 mt-3">
+            Awaken Your Dormant Instinct
+          </p>
 
-      {/* BOOKING */}
-      <section id="booking" className="min-h-screen p-20 bg-black">
-        <h2 className="text-3xl text-cyan-400">Book a Session</h2>
-      </section>
-
-      {/* CONTACT */}
-      <section id="contact" className="min-h-screen p-20 bg-black">
-        <h2 className="text-3xl text-cyan-400">Contact</h2>
-        <p className="mt-4">WhatsApp: +91 8777845559</p>
+          <p className="max-w-xl mx-auto text-gray-300 mt-6">
+            Healing for inner peace & balance — available online and in-person.
+          </p>
+        </div>
       </section>
     </>
   );
