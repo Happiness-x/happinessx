@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Header() {
   const navItems = [
     { label: "Home", href: "/" },
@@ -11,7 +9,7 @@ export default function Header() {
   ];
 
   return (
-    <nav className="fixed top-0 w-full bg-black/60 backdrop-blur-md text-cyan-200 py-4 flex justify-center gap-8 z-50">
+    <nav className="fixed top-0 w-full h-16 bg-black/70 backdrop-blur-md text-cyan-200 flex justify-center items-center gap-8 z-50">
       {navItems.map((item) => (
         <a
           key={item.label}
