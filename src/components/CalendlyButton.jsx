@@ -4,7 +4,7 @@ export default function CalendlyButton() {
   const openCalendly = () => {
     if (window.Calendly) {
       window.Calendly.initPopupWidget({
-        url: "https://calendly.com/YOUR_CALENDLY_USERNAME"
+        url: "https://calendly.com/happinessx"
       });
     }
   };
