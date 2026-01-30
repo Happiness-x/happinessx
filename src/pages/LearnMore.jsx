@@ -19,7 +19,9 @@ export default function Learning() {
 
       // Gentle transition → Calendly
       setTimeout(() => {
-        window.dispatchEvent(new Event("open-booking"));
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new Event("open-booking"));
+        }
       }, 1400);
     }
   }

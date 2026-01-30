@@ -1,18 +1,24 @@
 import { useEffect, useRef } from "react";
+import { isBrowser } from "../utils/isBrowser";
 
 export default function CalendlyEmbed({ url }) {
   const initialized = useRef(false);
 
   useEffect(() => {
-    if (initialized.current) return;
+    if (!isBrowser || initialized.current) return;
     initialized.current = true;
 
     const initCalendly = () => {
       if (!window.Calendly) return;
 
+      const container = document.getElementById("calendly-container");
+      if (!container) return;
+
+      container.innerHTML = "";
+
       window.Calendly.initInlineWidget({
         url,
-        parentElement: document.getElementById("calendly-container"),
+        parentElement: container,
       });
     };
 
@@ -32,10 +38,7 @@ export default function CalendlyEmbed({ url }) {
       <div
         id="calendly-container"
         className="w-full rounded-2xl border border-cyan-900 overflow-hidden"
-        style={{
-          height: "80vh",
-          minHeight: "900px",
-        }}
+        style={{ height: "80vh", minHeight: "900px" }}
       />
     </div>
   );

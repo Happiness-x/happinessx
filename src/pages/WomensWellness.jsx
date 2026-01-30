@@ -16,7 +16,11 @@ export default function WomensWellness() {
             natural rhythms—without force or expectation.
           </p>
           <button
-            onClick={() => window.dispatchEvent(new Event("open-booking"))}
+            onClick={() => {
+              if (typeof window !== "undefined") {
+                window.dispatchEvent(new Event("open-booking"));
+              }
+            }}
             className="mt-6 px-8 py-4 bg-cyan-500 text-black rounded-full font-semibold hover:bg-cyan-400 transition"
           >
             Schedule a Session

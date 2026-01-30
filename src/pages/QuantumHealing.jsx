@@ -4,14 +4,18 @@ import PageWrapper from "../components/PageWrapper";
 export default function QuantumHealing() {
   const [soften, setSoften] = useState(0);
 
-  useEffect(() => {
-    const onScroll = () => {
-      const value = Math.min(window.scrollY / 800, 1);
-      setSoften(value);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+   useEffect(() => {
+     if (typeof window === "undefined") return;
+
+     const onScroll = () => {
+       const value = Math.min(window.scrollY / 800, 1);
+       setSoften(value);
+     };
+
+     window.addEventListener("scroll", onScroll, { passive: true });
+     return () => window.removeEventListener("scroll", onScroll);
+   }, []);
+
 
   return (
     <PageWrapper>

@@ -1,8 +1,5 @@
 import { useEffect, useRef } from "react";
-
-const isBrowser =
-  typeof window !== "undefined" &&
-  typeof document !== "undefined";
+import { isBrowser } from "../utils/isBrowser";
 
 export default function CalendlyModal({ open, onClose }) {
   const initialized = useRef(false);

@@ -78,7 +78,11 @@ export default function Learning() {
       {/* CTA */}
       <div className="text-center">
         <button
-          onClick={() => window.dispatchEvent(new Event("open-booking"))}
+          onClick={() => {
+            if (typeof window !== "undefined") {
+              window.dispatchEvent(new Event("open-booking"));
+            }
+          }}
           className="px-10 py-4 rounded-full bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition"
         >
           Schedule a Release Session
