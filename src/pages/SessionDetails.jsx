@@ -1,9 +1,32 @@
+import { useEffect, useState } from "react";
 import PageWrapper from "../components/PageWrapper";
 
 export default function SessionDetails() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const reveal = mounted
+    ? "opacity-100 translate-y-0"
+    : "opacity-0 translate-y-3 motion-reduce:opacity-100 motion-reduce:translate-y-0";
+
   return (
     <PageWrapper>
-      <div className="max-w-4xl mx-auto px-6 py-24 text-gray-200 space-y-16">
+      <div className={`max-w-4xl mx-auto px-6 py-24 text-gray-200 space-y-16 transition-all duration-700 ease-out ${reveal}`}>
+        {/* decorative abstract header */}
+        <div aria-hidden className="pointer-events-none mb-4">
+          <svg width="100%" height="48" viewBox="0 0 800 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-40">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1">
+                <stop offset="0" stopColor="#075985" />
+                <stop offset="1" stopColor="#0ea5a4" />
+              </linearGradient>
+            </defs>
+            <path d="M0 24c80-16 160-16 240 0s160 16 240 0 160-16 320 0v24H0V24z" fill="url(#g1)" />
+          </svg>
+        </div>
         {/* ================= SECTION 1: TITLE & FRAMING ================= */}
         <section className="space-y-6">
           <h1 className="text-4xl md:text-5xl text-cyan-300 font-semibold">

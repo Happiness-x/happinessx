@@ -4,6 +4,25 @@ const isBrowser =
   typeof window !== "undefined" &&
   typeof document !== "undefined";
 
+/* ===== Meta helper for SEO (client-side) ===== */
+function MetaHome() {
+  useEffect(() => {
+    if (!isBrowser) return;
+    document.title = "Awareness-Based Wellness for Emotional Calm & Body Connection";
+
+    let meta = document.querySelector('meta[name="description"]');
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "description";
+      document.head.appendChild(meta);
+    }
+    meta.content =
+      "Private, awareness-based wellness experiences supporting relaxation, body awareness, and emotional grounding.";
+  }, []);
+
+  return null;
+}
+
 /* ================= PETAL SECTION ================= */
 function PetalSection({ children, delay = 0 }) {
   const ref = useRef(null);
@@ -112,36 +131,101 @@ export default function Home() {
       {/* ================= HERO ================= */}
       <section className="relative z-10 h-[100svh] flex items-center justify-center px-6 text-center">
         <div
-          className="max-w-5xl"
+          className="max-w-4xl"
           style={{
-            transform: reduceMotion ? "none" : `translateY(${-progress * 60}px)`,
-            opacity: reduceMotion ? 1 : 1 - progress * 0.85,
+            transform: reduceMotion ? "none" : `translateY(${-progress * 40}px)`,
+            opacity: reduceMotion ? 1 : 1 - progress * 0.75,
             transition: "transform 0.25s linear, opacity 0.25s linear",
           }}
         >
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-cyan-300 leading-tight">
-            Experience Subtle Connection
-            <br />
-            <span className="font-caveat text-cyan-200 font-normal">
-              Deep Inner Balance & Awareness
-            </span>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-cyan-300 leading-tight">
+            “This understands something I haven’t said out loud.”
           </h1>
 
-          <p className="mt-8 max-w-3xl mx-auto text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed">
-            A client-centered, one-to-one wellness experience designed to heighten
-            body awareness through intuitive presence and traditional wisdom.
+          <p className="mt-6 max-w-2xl mx-auto text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed">
+            Calm, private, awareness-based sessions creating space for emotional
+            permission, safety, and quiet inner listening. You remain in control
+            at every moment.
           </p>
 
-          <p className="mt-8 italic text-cyan-200">
-            Where ancient insight meets present-moment awareness.
-          </p>
+          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="/learn"
+              className="px-6 py-3 rounded-full bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition text-center"
+              aria-label="Begin private self-reflection"
+            >
+              Begin Private Self‑Reflection
+            </a>
+
+            <a
+              href="/how-it-works"
+              className="px-6 py-3 rounded-full border border-cyan-500 text-cyan-300 font-semibold hover:bg-cyan-900/30 transition text-center"
+            >
+              Learn How It Works
+            </a>
+          </div>
+
+          {/* micro-trust strip */}
+          <div className="mt-6 inline-flex items-center gap-4 text-xs text-gray-300 bg-black/40 px-4 py-2 rounded-full">
+            <span className="px-2">No physical touch</span>
+            <span className="h-2 w-px bg-gray-600 inline-block" />
+            <span className="px-2">Non‑invasive</span>
+            <span className="h-2 w-px bg-gray-600 inline-block" />
+            <span className="px-2">You are always in control</span>
+          </div>
         </div>
       </section>
 
+      {/* Set SEO meta for home (client-side when rendered) */}
+      {isBrowser ? (
+        <MetaHome />
+      ) : null}
+
       <PetalSection>
-        <h2 className="text-3xl md:text-4xl text-cyan-300 font-semibold text-center mb-16">
+        <h2 className="text-3xl md:text-4xl text-cyan-300 font-semibold text-center mb-6">
           How the Experience Supports You
         </h2>
+
+        {/* Recognition */}
+        <div className="max-w-3xl mx-auto text-gray-300 text-center mb-8">
+          <p className="text-lg">
+            Many people carry unspoken tension, emotional weight, and
+            unexpressed sensation in their body — without words for it. This
+            practice is built to notice and hold those subtle signals with
+            curiosity and care.
+          </p>
+        </div>
+
+        {/* What This Space Offers */}
+        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6 mb-8">
+          <div className="bg-black/50 border border-cyan-900 rounded-lg p-6">
+            <h3 className="text-cyan-300 font-semibold mb-3">What This Space Offers</h3>
+            <ul className="list-disc list-inside space-y-2 text-gray-300 ml-2">
+              <li>Awareness — gently noticing sensation and presence</li>
+              <li>Inner listening — a moment to attend without explanation</li>
+              <li>Nervous system settling — slow, calming pacing</li>
+              <li>Body‑based knowing — nonverbal sense of self and safety</li>
+            </ul>
+          </div>
+
+          {/* What This Is Not */}
+          <div className="bg-black/50 border border-cyan-900 rounded-lg p-6">
+            <h3 className="text-cyan-300 font-semibold mb-3">What This Is Not</h3>
+            <ul className="list-disc list-inside space-y-2 text-gray-300 ml-2">
+              <li>Not therapy or clinical treatment</li>
+              <li>Not medical care</li>
+              <li>Not sexual or physical contact</li>
+              <li>Not interpretation, diagnosis, or advice</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-sm text-gray-400">
+            Primary CTA: Begin with a private, anonymous self-reflection snippet —
+            experience-based, not outcome-based.
+          </p>
+        </div>
       </PetalSection>
 
       <div className="relative z-10 h-40 bg-gradient-to-b from-transparent to-black" />

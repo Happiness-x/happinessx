@@ -22,6 +22,7 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import LearnMore from "./pages/LearnMore";
 import SessionDetails from "./pages/SessionDetails";
+import ReflectionResults from "./pages/ReflectionResults";
 
 export default function App() {
   const [bookingOpen, setBookingOpen] = useState(false);
@@ -56,6 +57,7 @@ export default function App() {
             <Route path="/blog/:id" element={<BlogPost />} />
             <Route path="/learn" element={<LearnMore />} />
             <Route path="/session-details" element={<SessionDetails />} />
+            <Route path="/reflection-results" element={<ReflectionResults />} />
           </Routes>
         </main>
 
