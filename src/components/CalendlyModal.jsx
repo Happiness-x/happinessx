@@ -1,18 +1,19 @@
 import { useEffect, useRef } from "react";
 
+const isBrowser =
+  typeof window !== "undefined" &&
+  typeof document !== "undefined";
+
 export default function CalendlyModal({ open, onClose }) {
   const initialized = useRef(false);
   const containerRef = useRef(null);
 
   useEffect(() => {
-    if (!open) {
-      document.body.style.overflow = "";
-      return;
-    }
+    if (!isBrowser || !open) return;
 
     document.body.style.overflow = "hidden";
 
-    const intakeSummary = localStorage.getItem("hx_intake_summary");
+    const intakeSummary = window.localStorage?.getItem("hx_intake_summary");
 
     const calendlyUrl = intakeSummary
       ? `https://calendly.com/happinessx?notes=${encodeURIComponent(intakeSummary)}`
@@ -21,7 +22,7 @@ export default function CalendlyModal({ open, onClose }) {
     const initCalendly = () => {
       if (!window.Calendly || !containerRef.current) return;
 
-      containerRef.current.innerHTML = ""; // reset safely
+      containerRef.current.innerHTML = "";
 
       window.Calendly.initInlineWidget({
         url: calendlyUrl,
@@ -42,7 +43,7 @@ export default function CalendlyModal({ open, onClose }) {
         document.body.appendChild(script);
       }
     } else {
-      initCalendly(); // fast re-open
+      initCalendly(); // instant re-open
     }
 
     return () => {
@@ -51,7 +52,9 @@ export default function CalendlyModal({ open, onClose }) {
   }, [open]);
 
   function handleClose() {
-    localStorage.removeItem("hx_intake_summary"); // privacy
+    if (isBrowser) {
+      window.localStorage?.removeItem("hx_intake_summary");
+    }
     onClose();
   }
 
@@ -71,10 +74,7 @@ export default function CalendlyModal({ open, onClose }) {
           ✕
         </button>
 
-        <div
-          ref={containerRef}
-          className="flex-1 w-full overflow-y-auto"
-        />
+        <div ref={containerRef} className="flex-1 w-full overflow-y-auto" />
       </div>
     </div>
   );
