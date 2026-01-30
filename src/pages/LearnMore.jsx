@@ -1,34 +1,49 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PageWrapper from "../components/PageWrapper";
 
 export default function Learning() {
   const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
 
-    const response = await fetch("https://formspree.io/f/myznnojw", {
-      method: "POST",
-      body: formData,
-      headers: { Accept: "application/json" },
-    });
+    try {
+      const response = await fetch("https://formspree.io/f/myznnojw", {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
+      });
 
-    if (response.ok) {
+      // Show submitted UI regardless of Formspree result
       setSubmitted(true);
 
-      // Send reflection results email
+      // Send reflection results email in background and log response
       const formEmail = formData.get("email");
       if (formEmail) {
-        fetch("/api/send-reflection-email", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: formEmail }),
-        }).catch(() => {
-          // Email send failed silently; don't block UX
-        });
+        (async () => {
+          try {
+            const apiResp = await fetch("/api/send-reflection-email", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email: formEmail }),
+            });
+            const text = await apiResp.text();
+            console.log("/api/send-reflection-email status:", apiResp.status, text);
+          } catch (err) {
+            console.error("/api/send-reflection-email error:", err);
+          }
+        })();
       }
+    } catch (err) {
+      console.error("Formspree submit error:", err);
+      setSubmitted(true);
     }
+
+    // Navigate to reflection results immediately (do not wait for email send)
+    navigate("/reflection-results");
   }
 
   return (

@@ -9,6 +9,7 @@ export default function ReflectionResults() {
 
   useEffect(() => {
     setMounted(true);
+    console.log("ReflectionResults rendered");
   }, []);
 
   const reveal = mounted
