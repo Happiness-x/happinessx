@@ -1,17 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { isBrowser } from "../utils/isBrowser";
 
 export default function FloatingContact() {
   const [visible, setVisible] = useState(true);
-  let lastScrollY = window.scrollY;
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
+    if (!isBrowser) return;
+
+    lastScrollY.current = window.scrollY;
+
     const onScroll = () => {
-      if (window.scrollY > lastScrollY && window.scrollY > 120) {
+      if (window.scrollY > lastScrollY.current && window.scrollY > 120) {
         setVisible(false);
       } else {
         setVisible(true);
       }
-      lastScrollY = window.scrollY;
+      lastScrollY.current = window.scrollY;
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -19,12 +24,12 @@ export default function FloatingContact() {
   }, []);
 
   const track = (label) => {
-    if (window.gtag) {
-      window.gtag("event", "click", {
-        event_category: "Floating Contact",
-        event_label: label,
-      });
-    }
+    if (!isBrowser || !window.gtag) return;
+
+    window.gtag("event", "click", {
+      event_category: "Floating Contact",
+      event_label: label,
+    });
   };
 
   return (
@@ -34,11 +39,9 @@ export default function FloatingContact() {
     >
       {/* WhatsApp */}
       <a
-        href="https://wa.me/918777845559?text=Hello%20I%20want%20to%20book%20a%20healing%20session"
+        href="https://wa.me/918777845559"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat on WhatsApp"
-        title="Chat on WhatsApp"
         onClick={() => track("WhatsApp")}
         className="w-14 h-14 rounded-full bg-[#25D366]
                    flex items-center justify-center
@@ -50,8 +53,6 @@ export default function FloatingContact() {
       {/* Call */}
       <a
         href="tel:+918777845559"
-        aria-label="Call now"
-        title="Call now"
         onClick={() => track("Call")}
         className="w-14 h-14 rounded-full bg-cyan-600
                    flex items-center justify-center
