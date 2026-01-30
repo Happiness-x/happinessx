@@ -1,24 +1,59 @@
-export default function Header() {
-  const navItems = [
-    { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
-    { label: "Quantum", href: "/quantum-healing" },
-    { label: "Gallery", href: "/gallery" },
-    { label: "Blog", href: "/blog" },
-    { label: "Learning", href: "/learn" },
-  ];
+import { NavLink } from "react-router-dom";
 
+export default function Header({ onBookNow }) {
   return (
-    <nav className="fixed top-0 w-full h-16 bg-black/70 backdrop-blur-md text-cyan-200 flex justify-center items-center gap-8 z-50">
-      {navItems.map((item) => (
-        <a
-          key={item.label}
-          href={item.href}
-          className="hover:text-cyan-400 transition"
+    <header
+      className="
+        fixed top-0 w-full z-50
+        bg-black/70 backdrop-blur-md
+        border-b border-cyan-900
+      "
+    >
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+
+        {/* Left: Brand */}
+        <div className="text-cyan-300 font-semibold text-xl">
+          Happiness X
+        </div>
+
+        {/* Center: Navigation */}
+        <nav className="hidden md:flex gap-8 text-cyan-200">
+          {[
+            ["Home", "/"],
+            ["About", "/about"],
+            ["Quantum", "/quantum-healing"],
+            ["Gallery", "/gallery"],
+            ["Blog", "/blog"],
+            ["Learning", "/learn"],
+          ].map(([label, path]) => (
+            <NavLink
+              key={path}
+              to={path}
+              className={({ isActive }) =>
+                `hover:text-cyan-300 transition ${
+                  isActive ? "text-cyan-300" : ""
+                }`
+              }
+            >
+              {label}
+            </NavLink>
+          ))}
+        </nav>
+
+        {/* Right: Book Now */}
+        <button
+          onClick={() => window.dispatchEvent(new Event("open-booking"))}
+          className="
+            ml-4 px-6 py-2 rounded-full
+            bg-cyan-500 text-black font-semibold
+            hover:bg-cyan-400 hover:scale-105
+            transition
+            shadow-lg
+          "
         >
-          {item.label}
-        </a>
-      ))}
-    </nav>
+          Book Now
+        </button>
+      </div>
+    </header>
   );
 }

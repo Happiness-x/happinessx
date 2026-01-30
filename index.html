@@ -3,92 +3,77 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Happiness X — Awaken Your Dormented Instinct</title>
 
-    <!-- 🌿 SEO Meta -->
+    <title>
+      Happiness X — Subtle Connection, Deep Inner Balance & Awareness
+    </title>
+
+    <!-- SEO -->
     <meta
       name="description"
-      content="Happiness X — Energy Healing, Chakra Balance, and Quantum Therapy by Empath Healer Tapobroto Bhattacharya. Awaken your dormented instinct and restore balance."
+      content="Happiness X offers complementary, client-centered wellness sessions focused on awareness, relaxation, and personal wellbeing. Online sessions only."
     />
     <meta
       name="keywords"
-      content="Healing, Chakra, Quantum Energy, Reiki, Energy Therapy, Mind Balance, Happiness X, Tapobroto Bhattacharya, Empath Healer"
+      content="complementary wellness, awareness-based healing, somatic awareness, relaxation support, emotional grounding, holistic wellness, Happiness X, Tapobroto Bhattacharya"
     />
     <meta name="author" content="Tapobroto Bhattacharya" />
 
-    <!-- 🌐 Open Graph -->
-    <meta property="og:title" content="Happiness X — Awaken Your Dormented Instinct" />
+    <!-- Open Graph -->
+    <meta property="og:title" content="Happiness X — Awareness-Based Wellness" />
     <meta
       property="og:description"
-      content="Gentle energy work that harmonizes mind and body — available online and in-person."
+      content="Client-centered, non-medical wellness sessions focused on awareness and relaxation."
     />
-  <meta property="og:image" content="https://happinessx.in/logo.png" />
+    <meta property="og:image" content="https://happinessx.in/logo.png" />
     <meta property="og:url" content="https://happinessx.in" />
     <meta property="og:type" content="website" />
 
-    <!-- 🐦 Twitter Card -->
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Happiness X — Awaken Your Dormented Instinct" />
+    <meta name="twitter:title" content="Happiness X — Awareness-Based Wellness" />
     <meta
       name="twitter:description"
-      content="Healing for inner peace & balance by Empath Healer Tapobroto Bhattacharya."
+      content="Complementary wellness sessions. Online. Client-led. Non-medical."
     />
-  <meta name="twitter:image" content="https://happinessx.in/logo.png" />
+    <meta name="twitter:image" content="https://happinessx.in/logo.png" />
 
-  <!-- 🧘‍♂️ Favicon -->
-  <link rel="icon" type="image/png" href="/logo.png" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/logo.png" />
 
-    <!-- ✨ Fonts -->
+    <!-- Fonts -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600&family=Raleway:wght@300;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600&family=Raleway:wght@300;500&family=Caveat:wght@600&display=swap"
       rel="stylesheet"
     />
 
-    <!-- 🪷 Schema.org -->
+    <!-- Schema.org (Wellness-Safe) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
+        "@type": "HealthAndBeautyBusiness",
         "name": "Happiness X",
         "url": "https://happinessx.in",
-  "logo": "https://happinessx.in/logo.png",
-        "sameAs": [
-          "https://www.instagram.com/happynesspom/",
-          "https://www.facebook.com/tapobroto.bhattacharya/",
-          "https://www.linkedin.com/in/tapobroto-bhattacharya-1980a699/",
-          "https://www.youtube.com/@HEALER_T_BHATTACHARYA"
-        ],
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "telephone": "+91-8777845559",
-          "contactType": "Customer Service"
+        "description": "Complementary wellness services focused on awareness, relaxation, and personal wellbeing.",
+        "areaServed": "Worldwide",
+        "serviceType": "Online Wellness Sessions",
+        "provider": {
+          "@type": "Person",
+          "name": "Tapobroto Bhattacharya"
         }
       }
     </script>
-    <!-- Calendly inline widget (used by /learn page) -->
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
-    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-    <!-- Client-side image protection script (deterrent only) -->
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FXG9CY3L8Z"></script>
     <script>
-      // Disable right-click context menu globally
-      document.addEventListener('contextmenu', function (e) {
-        // allow on form fields and inputs
-        const tag = e.target.tagName.toLowerCase();
-        if (tag === 'input' || tag === 'textarea') return;
-        e.preventDefault();
-      });
-
-      // Prevent dragging images
-      document.addEventListener('dragstart', function (e) {
-        if (e.target && e.target.nodeName === 'IMG') e.preventDefault();
-      });
-
-      // Prevent opening images/new tab on middle click
-      document.addEventListener('auxclick', function (e) {
-        if (e.button === 1 && e.target && e.target.nodeName === 'IMG') e.preventDefault();
-      });
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag("js", new Date());
+      gtag("config", "G-FXG9CY3L8Z");
     </script>
   </head>
+
   <body class="bg-black text-white font-serif">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>

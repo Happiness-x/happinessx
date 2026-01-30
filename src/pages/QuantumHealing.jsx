@@ -1,151 +1,151 @@
-import React, { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import { useEffect, useState } from "react";
+import PageWrapper from "../components/PageWrapper";
 
 export default function QuantumHealing() {
+  const [soften, setSoften] = useState(0);
+
   useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
+    const onScroll = () => {
+      const value = Math.min(window.scrollY / 800, 1);
+      setSoften(value);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <div className="bg-gradient-to-b from-black via-teal-950 to-black text-white font-serif relative min-h-screen scroll-smooth">
-      {/* Top Bar */}
-      <nav className="fixed top-0 w-full bg-black/40 backdrop-blur-md border-b border-cyan-900 text-cyan-200 py-4 px-8 flex justify-between items-center z-50">
-        <a href="/" className="text-cyan-300 font-semibold text-xl hover:text-cyan-100 transition">
-          ← Back to Home
-        </a>
-        <span className="italic text-cyan-400">Quantum Therapeutic Touch</span>
-      </nav>
-
-      {/* 🌌 Hero */}
-      <section
-        id="quantum"
-        data-aos="fade-up"
-        className="pt-24 px-6 py-16 text-center flex flex-col items-center justify-center bg-[url('/healing-bg5.jpg')] bg-cover bg-center relative"
+    <PageWrapper>
+      <div
+        className="max-w-5xl mx-auto px-6 py-24 text-gray-200 transition-all duration-500"
+        style={{
+          lineHeight: `${1.6 + soften * 0.2}`,
+          filter: `contrast(${1 - soften * 0.05})`,
+        }}
       >
-        <div className="absolute inset-0 bg-black/70"></div>
-        <div className="relative z-10 max-w-5xl space-y-10">
-          <h1 className="text-5xl font-bold text-cyan-300 mb-4">
-            Understanding Quantum Therapeutic Touch
-          </h1>
-          <p className="text-gray-300 leading-relaxed text-lg max-w-3xl mx-auto">
-            Quantum Therapeutic Touch bridges energy awareness with modern science.
-            It’s a subtle practice that aligns vibrations across the energetic field,
-            awakening balance, clarity, and peace.
+        {/* ================= TITLE ================= */}
+        <h1 className="text-4xl md:text-5xl text-cyan-300 font-semibold mb-12 text-center">
+          Quantum Therapeutic Touch
+        </h1>
+
+        {/* ================= INTRO ================= */}
+        <section className="mb-20 space-y-6 text-sm sm:text-base md:text-lg">
+          <p>
+            Quantum Therapeutic Touch is a complementary wellness practice
+            centered on awareness, presence, and internal signal clarity.
+            Sessions are non-invasive, non-directive, and conducted exclusively online.
           </p>
-          <div className="max-w-3xl mx-auto mt-6 text-left bg-black/50 p-4 rounded">
-            <h3 className="text-cyan-300 font-semibold mb-2">Ayurvedic clinical framing</h3>
-            <p className="text-gray-300">
-              We integrate a practical Ayurvedic lens — Sattva (clarity), Rajas (activity), and Tamas (inertia)
-              — as a clinical model to describe mental-energy states. Interventions are selected to
-              reduce excessive Rajas or Tamas and promote Sattvic balance using somatic regulation and
-              behavioral exercises.
+
+          <p>
+            The term <em>quantum</em> is used symbolically, referring not to
+            physics or energy transmission, but to subtle shifts in perception
+            that occur when attention becomes steady and unforced.
+          </p>
+
+          <p>
+            Rather than attempting to change the body, sessions create conditions
+            in which the body’s own regulatory intelligence may become more accessible.
+          </p>
+        </section>
+
+        {/* ================= QUIET DIAGRAMS ================= */}
+        <section className="mb-28">
+          <h2 className="text-2xl text-cyan-300 font-semibold mb-6 text-center">
+            Symbolic Cognitive Models
+          </h2>
+
+          <p className="text-center text-gray-400 text-sm mb-12 max-w-3xl mx-auto">
+            The following diagrams are illustrative representations of awareness-based
+            regulation. They do not depict anatomy, energy fields, or medical mechanisms.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-12">
+            {[ 
+              { src: "/quantum-touch-1.png", label: "Attention and Internal Coherence" },
+              { src: "/quantum-touch-2.png", label: "Perception, Stillness, and Regulation" }
+            ].map((img, i) => (
+              <figure key={i} className="space-y-4">
+                <div className="relative w-full aspect-[4/3] bg-black rounded-xl border border-cyan-900 overflow-hidden">
+                  <img
+                    src={img.src}
+                    alt={img.label}
+                    className="absolute inset-0 w-full h-full object-contain p-6 opacity-90"
+                  />
+                </div>
+                <figcaption className="text-xs text-gray-400 text-center">
+                  {img.label} (symbolic model)
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+
+        {/* ================= AWARENESS PRECEDES REGULATION ================= */}
+        <section className="mb-28 border-l-2 border-cyan-900 pl-6">
+          <h2 className="text-3xl text-cyan-300 font-semibold mb-6">
+            Why Awareness Precedes Regulation
+          </h2>
+
+          <div className="space-y-6 text-sm sm:text-base md:text-lg">
+            <p>
+              Across neuroscience, somatic psychology, and traditional wellness systems,
+              a shared principle emerges: regulation is not imposed — it is accessed.
+            </p>
+
+            <p>
+              When attention is directed inward without urgency or evaluation,
+              the nervous system receives information rather than instruction.
+              This informational clarity allows self-organising responses to emerge.
+            </p>
+
+            <p>
+              In Ayurvedic traditions, this relationship is described as the
+              restoration of balance through awareness, not correction.
+              Modern science describes the same process through autonomic regulation.
+            </p>
+
+            <p className="italic text-cyan-300 text-center mt-12">
+              Awareness does not act.  
+              It allows.
             </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 💠 Education Blocks */}
-      <section className="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12">
-        <div
-          data-aos="fade-right"
-          className="bg-black/60 border border-cyan-900 rounded-2xl p-6 shadow-lg hover:shadow-[0_0_25px_#0891b2] transition"
-        >
-          <h2 className="text-2xl text-cyan-400 mb-4">Quantum Therapeutic Touch</h2>
-          <p className="text-gray-300 mb-4">
-            Practitioners work through awareness and intention to harmonize the
-            client’s energy field. Sessions can be hands-on or remote, promoting
-            deep relaxation, clarity, and healing.
+        {/* ================= SILENCE SECTION ================= */}
+        <section className="mb-28 text-center">
+          <p className="text-gray-400 italic text-lg md:text-xl max-w-2xl mx-auto">
+            Some shifts occur not when something is added,  
+            but when nothing interferes.
           </p>
-          <ul className="list-disc list-inside text-gray-300 space-y-1">
-            <li>Energy Awareness & Resonance</li>
-            <li>Focused Intention and Visualization</li>
-            <li>Balancing Energy Flow</li>
-            <li>Stress Release & Emotional Calm</li>
-          </ul>
-        </div>
+        </section>
 
-        <div
-          data-aos="fade-left"
-          className="bg-black/60 border border-cyan-900 rounded-2xl p-6 shadow-lg hover:shadow-[0_0_25px_#0891b2] transition"
-        >
-          <h2 className="text-2xl text-cyan-400 mb-4">Quantum Science Connection</h2>
-          <p className="text-gray-300 mb-4">
-            Drawing parallels with modern physics, this approach views healing
-            as energy rebalancing within an interconnected field.
-          </p>
+        {/* ================= HOW COMMUNICATION OCCURS ================= */}
+        <section className="mb-28">
+          <h2 className="text-3xl text-cyan-300 font-semibold mb-6 text-center">
+            How Communication Occurs Without Words
+          </h2>
 
-          <p className="text-gray-300 mb-3 font-semibold">Who can receive this work</p>
-          <ul className="list-disc list-inside text-gray-300 space-y-1 mb-4">
-            <li>Adults seeking relief from stress, anxiety, depression, anger, or fatigue.</li>
-            <li>Women seeking trauma-informed somatic therapy, work-life balance support, and regenerative touch.</li>
-            <li>Parents of children with sensory or developmental differences interested in supportive somatic techniques (not a replacement for specialist care).</li>
-            <li>Anyone seeking deeper self-awareness, soul-awakening practices, and clearer daily functioning.</li>
-          </ul>
+          <div className="space-y-6 text-sm sm:text-base md:text-lg">
+            <p>
+              Sessions involve minimal verbal guidance. This is intentional.
+              Many forms of awareness do not rely on language to function.
+            </p>
 
-          <ul className="list-disc list-inside text-gray-300 space-y-1">
-            <li>Energy at the Core of Matter</li>
-            <li>Observer Effect & Conscious Intention</li>
-            <li>Nonlocal Healing (Entanglement)</li>
-          </ul>
-          <p className="text-sm text-cyan-200 mt-4 italic">
-            Note: Quantum Therapeutic Touch is complementary wellness, not a medical substitute.
-          </p>
-        </div>
-      </section>
+            <p>
+              Through pacing, silence, breath orientation, and presence,
+              clients often report that their body “understands” what to do
+              without being told.
+            </p>
 
-      {/* 🩺 How it works & Offerings */}
-      <section className="max-w-6xl mx-auto px-6 py-12">
-        <div className="bg-black/60 border border-cyan-900 rounded-2xl p-6">
-          <h3 className="text-2xl text-cyan-300 mb-3">How it works (clinical overview)</h3>
-          <ol className="list-decimal list-inside text-gray-300 space-y-2">
-            <li><strong>Assessment</strong> — clinical intake and somatic mapping to identify predominant guna and symptom drivers.</li>
-            <li><strong>Targeted Intervention</strong> — breath protocols, grounding, sensory modulation, and consented therapeutic touch as appropriate.</li>
-            <li><strong>Integration</strong> — practical daily exercises, sleep and stress hygiene recommendations, and short practices to reinforce change.</li>
-            <li><strong>Follow-up</strong> — outcome tracking and adjustments across 2–4 sessions to consolidate improvements.</li>
-          </ol>
-
-          <h3 className="text-2xl text-cyan-300 mt-6 mb-3">Therapy offerings</h3>
-          <div className="grid md:grid-cols-3 gap-4 text-gray-300">
-            <div className="bg-black/50 p-4 rounded">
-              <h4 className="text-cyan-200 font-semibold">For Women</h4>
-              <p className="text-sm mt-2">Work-life balance coaching, trauma-informed somatic healing, therapeutic touch for tension release and emotional regulation.</p>
-            </div>
-            <div className="bg-black/50 p-4 rounded">
-              <h4 className="text-cyan-200 font-semibold">For Children</h4>
-              <p className="text-sm mt-2">Supportive sensory interventions for developmental support and regulation; collaborative work with caregivers and specialists.</p>
-            </div>
-            <div className="bg-black/50 p-4 rounded">
-              <h4 className="text-cyan-200 font-semibold">For All</h4>
-              <p className="text-sm mt-2">Soul-awakening practices, consciousness work, and somatic skills to improve daily functioning and self-awareness.</p>
-            </div>
+            <p>
+              These responses are understood as internally generated
+              physiological and perceptual adjustments associated with
+              relaxation and attentional clarity.
+            </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 🌌 Images */}
-      <div className="flex flex-col md:flex-row justify-center gap-8 px-6 pb-20">
-        <div className="img-protect-wrapper w-full md:w-[45%]">
-          <img src="/quantum-touch-1.png" alt="Quantum Energy Healing Diagram" className="rounded-2xl border border-cyan-900 shadow-lg" />
-          <div className="img-protect-overlay" />
-          <div className="img-protect-badge">© Happiness X</div>
-        </div>
-        <div className="img-protect-wrapper w-full md:w-[45%]">
-          <img src="/quantum-touch-2.png" alt="Quantum Science Illustration" className="rounded-2xl border border-cyan-900 shadow-lg" />
-          <div className="img-protect-overlay" />
-          <div className="img-protect-badge">© Happiness X</div>
-        </div>
+        
       </div>
-
-      {/* 🌠 CTA */}
-      <section className="text-center pb-20">
-        <a
-          href="/#booking"
-          className="bg-cyan-600 text-black px-8 py-4 rounded-lg shadow-lg hover:bg-cyan-500 hover:scale-105 transition text-lg font-semibold"
-        >
-          Book a Healing Session
-        </a>
-      </section>
-    </div>
+    </PageWrapper>
   );
 }

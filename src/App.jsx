@@ -1,12 +1,21 @@
-import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import { useState, useEffect } from "react";
 
 import Header from "./components/Header";
+import Footer from "./components/Footer";
+import CalendlyModal from "./components/CalendlyModal";
+import FloatingContact from "./components/FloatingContact";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Services from "./pages/Services";
+import HowItWorks from "./pages/HowItWorks";
+import FAQ from "./pages/FAQ";
+import EthicsConsent from "./pages/EthicsConsent";
+import PrivacyDisclaimer from "./pages/PrivacyDisclaimer";
+import CodeOfConduct from "./pages/CodeOfConduct";
+import TermsCancellation from "./pages/TermsCancellation";
 import QuantumHealing from "./pages/QuantumHealing";
 import Gallery from "./pages/Gallery";
 import Blog from "./pages/Blog";
@@ -14,27 +23,46 @@ import BlogPost from "./pages/BlogPost";
 import LearnMore from "./pages/LearnMore";
 
 export default function App() {
+  const [bookingOpen, setBookingOpen] = useState(false);
+
   useEffect(() => {
-    AOS.init({ duration: 1200, once: true });
+    const openBooking = () => setBookingOpen(true);
+    window.addEventListener("open-booking", openBooking);
+    return () => window.removeEventListener("open-booking", openBooking);
   }, []);
 
   return (
-    <div className="bg-black text-white font-serif min-h-screen">
-      {/* Fixed Header */}
-      <Header />
+    <ErrorBoundary>
+      <div className="bg-black text-white font-serif min-h-screen relative">
+        <Header onBookNow={() => setBookingOpen(true)} />
 
-      {/* MAIN CONTENT OFFSET */}
-      <main className="pt-20">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/quantum-healing" element={<QuantumHealing />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:id" element={<BlogPost />} />
-          <Route path="/learn" element={<LearnMore />} />
-        </Routes>
-      </main>
-    </div>
+        <main className="pt-20 relative z-10">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/ethics-consent" element={<EthicsConsent />} />
+            <Route path="/privacy-disclaimer" element={<PrivacyDisclaimer />} />
+            <Route path="/code-of-conduct" element={<CodeOfConduct />} />
+            <Route path="/terms-cancellation" element={<TermsCancellation />} />
+            <Route path="/quantum-healing" element={<QuantumHealing />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<BlogPost />} />
+            <Route path="/learn" element={<LearnMore />} />
+          </Routes>
+        </main>
+
+        <Footer />
+        <FloatingContact />
+
+        <CalendlyModal
+          open={bookingOpen}
+          onClose={() => setBookingOpen(false)}
+        />
+      </div>
+    </ErrorBoundary>
   );
 }
