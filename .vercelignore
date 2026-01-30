@@ -1,0 +1,6 @@
+public-watermarked/
+scripts/
+src/scripts/
+node_modules/
+.DS_Store
+.vscode/
