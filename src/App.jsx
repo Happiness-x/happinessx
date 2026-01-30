@@ -21,11 +21,14 @@ import Gallery from "./pages/Gallery";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import LearnMore from "./pages/LearnMore";
+import SessionDetails from "./pages/SessionDetails";
 
 export default function App() {
   const [bookingOpen, setBookingOpen] = useState(false);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     const openBooking = () => setBookingOpen(true);
     window.addEventListener("open-booking", openBooking);
     return () => window.removeEventListener("open-booking", openBooking);
@@ -52,6 +55,7 @@ export default function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:id" element={<BlogPost />} />
             <Route path="/learn" element={<LearnMore />} />
+            <Route path="/session-details" element={<SessionDetails />} />
           </Routes>
         </main>
 

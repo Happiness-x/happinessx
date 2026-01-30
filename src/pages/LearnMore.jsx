@@ -17,12 +17,17 @@ export default function Learning() {
     if (response.ok) {
       setSubmitted(true);
 
-      // Gentle transition → Calendly
-      setTimeout(() => {
-        if (typeof window !== "undefined") {
-          window.dispatchEvent(new Event("open-booking"));
-        }
-      }, 1400);
+      // Send reflection results email
+      const formEmail = formData.get("email");
+      if (formEmail) {
+        fetch("/api/send-reflection-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: formEmail }),
+        }).catch(() => {
+          // Email send failed silently; don't block UX
+        });
+      }
     }
   }
 
@@ -223,14 +228,32 @@ export default function Learning() {
               </form>
             </>
           ) : (
-            <div className="text-center max-w-xl mx-auto">
-              <h3 className="text-2xl text-cyan-300 mb-4">
-                Thank you for sharing
+            <div className="text-center max-w-2xl mx-auto space-y-6">
+              <h3 className="text-2xl text-cyan-300 font-semibold">
+                Your Reflection Has Been Received
               </h3>
-              <p className="text-gray-300 text-sm">
-                Your reflection has been received.  
-                You’ll be guided to scheduling shortly.
+              <p className="text-gray-300 text-base leading-relaxed">
+                Thank you for taking time to reflect. 
+                A gentle email has been sent to acknowledge your reflection.
               </p>
+              <p className="text-gray-400 text-sm italic">
+                If you'd like to explore a guided awareness session further, 
+                you can view detailed information on the next page.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+                <a
+                  href="/session-details"
+                  className="px-10 py-3 rounded-full bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition text-center"
+                >
+                  View Session Details
+                </a>
+                <a
+                  href="/"
+                  className="px-10 py-3 rounded-full border border-cyan-500 text-cyan-300 font-semibold hover:bg-cyan-900/30 transition text-center"
+                >
+                  Return Home
+                </a>
+              </div>
             </div>
           )}
         </section>
