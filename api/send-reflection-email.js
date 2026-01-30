@@ -32,6 +32,7 @@ export default async function handler(req, res) {
     );
     const htmlContent = fs.readFileSync(templatePath, "utf-8");
 
+    console.info(`[send-reflection-email] Attempting to send to ${email}`);
     // Send email via configured service
     // Currently supports:
     // 1. Sendgrid (SENDGRID_API_KEY env var)
@@ -40,11 +41,12 @@ export default async function handler(req, res) {
     // 4. Fallback: log for manual processing (development mode)
 
     const emailSent = await sendEmail(email, htmlContent);
-
     if (!emailSent) {
+      console.error(`[send-reflection-email] Failed to send to ${email}`);
       return res.status(500).json({ error: "Failed to send email" });
     }
 
+    console.info(`[send-reflection-email] Sent to ${email}`);
     return res.status(200).json({
       success: true,
       message: "Reflection acknowledgement email sent",

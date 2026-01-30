@@ -9,7 +9,21 @@ export default function ReflectionResults() {
 
   useEffect(() => {
     setMounted(true);
-    console.log("ReflectionResults rendered");
+
+    // Client-side analytics + safe logging
+    const isBrowser = typeof window !== "undefined" && typeof document !== "undefined";
+    if (isBrowser) {
+      try {
+        if (window.gtag) {
+          window.gtag("event", "reflection_results_view", {});
+        }
+        if (process.env.NODE_ENV === "development") {
+          console.info("[analytics] reflection_results_view");
+        }
+      } catch (e) {
+        // swallow analytics errors
+      }
+    }
   }, []);
 
   const reveal = mounted

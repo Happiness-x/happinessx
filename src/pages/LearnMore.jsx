@@ -20,6 +20,14 @@ export default function Learning() {
       // Show submitted UI regardless of Formspree result
       setSubmitted(true);
 
+      // Analytics: reflection_form_submit
+      try {
+        if (typeof window !== "undefined" && window.gtag) {
+          window.gtag("event", "reflection_form_submit", { method: "formspree" });
+        }
+        if (process.env.NODE_ENV === "development") console.info("[analytics] reflection_form_submit");
+      } catch (e) {}
+
       // Send reflection results email in background and log response
       const formEmail = formData.get("email");
       if (formEmail) {
@@ -31,9 +39,11 @@ export default function Learning() {
               body: JSON.stringify({ email: formEmail }),
             });
             const text = await apiResp.text();
-            console.log("/api/send-reflection-email status:", apiResp.status, text);
+            console.info("/api/send-reflection-email status:", apiResp.status, text);
+            try { if (typeof window !== "undefined" && window.gtag) window.gtag("event","reflection_email_send", { status: apiResp.status }); } catch(e){}
           } catch (err) {
             console.error("/api/send-reflection-email error:", err);
+            try { if (typeof window !== "undefined" && window.gtag) window.gtag("event","reflection_email_send", { status: "error" }); } catch(e){}
           }
         })();
       }
