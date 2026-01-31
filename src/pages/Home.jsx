@@ -175,88 +175,53 @@ export default function Home() {
       ) : null}
 
       <PetalSection>
-        <h2 className="text-3xl md:text-4xl text-cyan-300 font-semibold text-center mb-6">
+        <h2 className="text-4xl md:text-5xl text-cyan-300 font-semibold text-center mb-12">
           How the Experience Supports You
         </h2>
 
         {/* Recognition */}
-        <div className="max-w-3xl mx-auto text-gray-300 text-center mb-8">
-          <p className="text-lg">
+        <div className="max-w-3xl mx-auto text-center mb-16 space-y-4">
+          <p className="text-lg leading-relaxed text-gray-300">
             Many people carry unspoken tension, emotional weight, and
-            unexpressed sensation in their body — without words for it. This
-            practice is built to notice and hold those subtle signals with
+            unexpressed sensation in their body — without words for it.
+          </p>
+          <p className="text-lg leading-relaxed text-gray-300">
+            This practice is built to notice and hold those subtle signals with
             curiosity and care.
           </p>
         </div>
 
         {/* What This Space Offers */}
-        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6 mb-8">
-          <div className="bg-black/50 border border-cyan-900 rounded-lg p-6">
-            <h3 className="text-cyan-300 font-semibold mb-3">What This Space Offers</h3>
-            <ul className="list-disc list-inside space-y-2 text-gray-300 ml-2">
-              <li>Awareness — gently noticing sensation and presence</li>
-              <li>Inner listening — a moment to attend without explanation</li>
-              <li>Nervous system settling — slow, calming pacing</li>
-              <li>Body‑based knowing — nonverbal sense of self and safety</li>
+        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 mb-16">
+          <div className="card">
+            <h3 className="text-2xl text-cyan-300 font-semibold mb-6">What This Space Offers</h3>
+            <ul className="list-disc list-inside space-y-3 text-gray-300 ml-2">
+              <li className="leading-relaxed">Awareness — gently noticing sensation and presence</li>
+              <li className="leading-relaxed">Inner listening — a moment to attend without explanation</li>
+              <li className="leading-relaxed">Nervous system settling — slow, calming pacing</li>
+              <li className="leading-relaxed">Body‑based knowing — nonverbal sense of self and safety</li>
             </ul>
           </div>
 
           {/* What This Is Not */}
-          <div className="bg-black/50 border border-cyan-900 rounded-lg p-6">
-            <h3 className="text-cyan-300 font-semibold mb-3">What This Is Not</h3>
-            <ul className="list-disc list-inside space-y-2 text-gray-300 ml-2">
-              <li>Not therapy or clinical treatment</li>
-              <li>Not medical care</li>
-              <li>No physical contact</li>
-              <li>Not interpretation, diagnosis, or advice</li>
+          <div className="card">
+            <h3 className="text-2xl text-cyan-300 font-semibold mb-6">What This Is Not</h3>
+            <ul className="list-disc list-inside space-y-3 text-gray-300 ml-2">
+              <li className="leading-relaxed">Not therapy or clinical treatment</li>
+              <li className="leading-relaxed">Not medical care</li>
+              <li className="leading-relaxed">No physical contact</li>
+              <li className="leading-relaxed">Not interpretation, diagnosis, or advice</li>
             </ul>
           </div>
         </div>
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-sm text-gray-400">
-            Primary CTA: Begin with a private, anonymous self-reflection snippet —
-            experience-based, not outcome-based.
+          <p className="microcopy-reassurance">
+            Begin with a private, anonymous self-reflection — experience-based, not outcome-based.
           </p>
         </div>
       </PetalSection>
 
-      {/* ================= SERVICE PREVIEW ================= */}
-      <PetalSection delay={120}>
-        <h2 className="text-3xl md:text-4xl text-cyan-300 font-semibold text-center mb-8">
-          Service Preview
-        </h2>
-
-        <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <a href="/how-it-works?path=quantum" className="group block bg-black/50 border border-cyan-900 rounded-lg p-6 hover:scale-[1.01] transition-transform focus:outline-none">
-            <h3 className="text-cyan-300 font-semibold mb-2">Quantum Therapeutic Touch</h3>
-            <p className="text-sm text-gray-300 mb-4">A perspective-friendly approach for thinkers and skeptics.</p>
-            <p className="text-xs text-gray-400">This is informational only.</p>
-          </a>
-
-          <a href="/how-it-works?path=women" className="group block bg-black/50 border border-cyan-900 rounded-lg p-6 hover:scale-[1.01] transition-transform focus:outline-none">
-            <h3 className="text-cyan-300 font-semibold mb-2">Women’s-Focused Awareness Session</h3>
-            <p className="text-sm text-gray-300 mb-4">Permission, safety, and paced presence for women.</p>
-            <p className="text-xs text-gray-400">This is informational only.</p>
-          </a>
-
-          <a href="/how-it-works?path=learning" className="group block bg-black/50 border border-cyan-900 rounded-lg p-6 hover:scale-[1.01] transition-transform focus:outline-none">
-            <h3 className="text-cyan-300 font-semibold mb-2">General Somatic Awareness Support</h3>
-            <p className="text-sm text-gray-300 mb-4">For learners curious about body-based awareness.</p>
-            <p className="text-xs text-gray-400">This is informational only.</p>
-          </a>
-
-          <a href="/how-it-works?path=guided" className="group block bg-black/50 border border-cyan-900 rounded-lg p-6 hover:scale-[1.01] transition-transform focus:outline-none">
-            <h3 className="text-cyan-300 font-semibold mb-2">Private Guided Wellness Session</h3>
-            <p className="text-sm text-gray-300 mb-4">A cautious, private one-to-one guided experience.</p>
-            <p className="text-xs text-gray-400">This is informational only.</p>
-          </a>
-        </div>
-
-        <div className="max-w-3xl mx-auto text-center mt-8">
-          <p className="text-sm text-gray-400">Private · Non-medical · Non-sexual · No obligation</p>
-        </div>
-      </PetalSection>
-
+      {/* ================= FOOTER GRADIENT ================= */}
       <div className="relative z-10 h-40 bg-gradient-to-b from-transparent to-black" />
 
       <style>{`

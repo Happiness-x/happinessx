@@ -5,6 +5,12 @@ export default function Learning() {
         Learning & Context
       </h1>
 
+      <p className="max-w-3xl mx-auto text-center mb-12 text-gray-300">
+        This section offers concise background on body awareness, nervous
+        system settling, and presence. These educational notes aim to clarify
+        what sessions focus on and how somatic attention supports rest.
+      </p>
+
       {/* Somatic Awareness */}
       <section className="mb-16">
         <h2 className="text-2xl text-cyan-300 mb-4">
@@ -81,7 +87,7 @@ export default function Learning() {
           href="/how-it-works?path=learning"
           className="px-10 py-4 rounded-full bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition inline-block"
         >
-          Learn How Sessions Work
+          Learn how sessions work
         </a>
         <div className="mt-4 text-sm">
           <a href="/essay/why-women-carry-sensation" className="text-cyan-300 underline">Read: When the Body Holds What the Mind Can’t Say</a>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PageWrapper from "../components/PageWrapper";
 
-export default function Learning() {
+export default function SelfReflection() {
   const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
   const [formState, setFormState] = useState({ name: "", email: "", agreed: false });

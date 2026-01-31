@@ -120,11 +120,11 @@ export default function ReflectionResults() {
   return (
     <PageWrapper>
       <div
-        className={`max-w-4xl mx-auto px-6 py-24 text-gray-200 space-y-16 transition-all duration-700 ease-out ${reveal}`}
+        className={`max-w-4xl mx-auto px-6 py-24 text-gray-200 space-y-12 transition-all duration-700 ease-out ${reveal}`}
       >
         {/* ================= HEADER ================= */}
         <section className="space-y-6 text-center">
-          <h1 className="text-4xl md:text-5xl text-cyan-300 font-semibold">
+          <h1 className="text-5xl text-cyan-300 font-semibold">
             {archetypeText.headline}
           </h1>
           <p className="text-lg leading-relaxed max-w-2xl mx-auto text-gray-300">

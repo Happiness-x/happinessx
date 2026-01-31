@@ -1,21 +1,259 @@
+/* Import Design Tokens */
+@import url("./design-tokens.css");
+
+/* Import Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz@9..144&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Smooth page transitions */
-.page-enter {
-  animation: pageIn 520ms cubic-bezier(.22,.9,.27,1) both;
+/* ========== BASE STYLES ========== */
+html {
+  scroll-behavior: smooth;
 }
 
-@keyframes pageIn {
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  line-height: var(--leading-relaxed);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========== HEADINGS ========== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--leading-normal);
+  color: var(--color-accent-soft);
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-4);
+}
+
+h1 {
+  font-size: var(--text-4xl);
+}
+
+h2 {
+  font-size: var(--text-2xl);
+}
+
+h3 {
+  font-size: var(--text-xl);
+}
+
+/* ========== PARAGRAPH & TEXT ========== */
+p {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
+
+/* Long-form reading */
+.reading-heavy p {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+}
+
+/* Muted / Disclaimer text */
+.text-muted {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+}
+
+/* Reassurance microcopy (italic, soft) */
+.microcopy-reassurance {
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  font-style: italic;
+  line-height: var(--leading-relaxed);
+  margin-top: var(--space-2);
+}
+
+/* ========== LINKS ========== */
+a {
+  color: var(--color-accent-primary);
+  text-decoration: none;
+  transition: color var(--transition-normal);
+}
+
+a:hover {
+  color: var(--color-accent-soft);
+  text-decoration: underline;
+}
+
+a:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* ========== BUTTONS ========== */
+button, [role="button"] {
+  font-family: var(--font-body);
+  border-radius: var(--btn-radius);
+  min-height: var(--btn-min-height);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+}
+
+button:focus-visible, [role="button"]:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Primary Button */
+.btn-primary {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--btn-primary-hover);
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background-color: var(--btn-secondary-bg);
+  border: var(--btn-secondary-border);
+  color: var(--btn-secondary-text);
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--btn-secondary-hover-bg);
+  color: var(--color-accent-soft);
+}
+
+/* Tertiary Button (Text-only) */
+.btn-tertiary {
+  background: none;
+  border: none;
+  color: var(--btn-tertiary-text);
+  padding: var(--space-2) var(--space-3);
+}
+
+.btn-tertiary:hover:not(:disabled) {
+  color: var(--btn-tertiary-hover);
+}
+
+/* ========== FORM INPUTS ========== */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea,
+select {
+  font-family: var(--font-body);
+  width: 100%;
+  min-height: var(--form-input-height);
+  padding: var(--space-3) var(--space-4);
+  border: var(--form-input-border);
+  border-radius: var(--form-input-radius);
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  transition: border-color var(--transition-normal), background-color var(--transition-normal);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+  border-color: var(--color-accent-primary);
+  background-color: var(--color-bg-primary);
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--color-accent-primary);
+}
+
+input[type="checkbox"]:focus-visible {
+  outline: var(--focus-ring);
+}
+
+/* ========== CARDS & PANELS ========== */
+.card {
+  background-color: var(--card-soft-bg);
+  border: var(--card-soft-border);
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+}
+
+/* ========== SECTIONS ========== */
+.section-spacing {
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+.section-divider {
+  border-top: 1px solid rgba(79, 209, 197, 0.2);
+  margin-top: var(--space-8);
+  padding-top: var(--space-8);
+}
+
+/* ========== UTILITY: CONTENT WIDTH ========== */
+.content-narrow {
+  max-width: 36rem; /* 576px */
+}
+
+.content-medium {
+  max-width: 48rem; /* 768px */
+}
+
+.content-wide {
+  max-width: 64rem; /* 1024px */
+}
+
+/* ========== PAGE TRANSITIONS ========== */
+.fade-in {
+  animation: fadeIn var(--transition-slow) ease-out;
+}
+
+@keyframes fadeIn {
   0% { opacity: 0; transform: translateY(8px); }
   100% { opacity: 1; transform: translateY(0); }
 }
+
+/* Staggered content reveal */
+.fade-in-stagger > * {
+  animation: fadeIn var(--transition-slow) ease-out backwards;
+}
+
+.fade-in-stagger > *:nth-child(1) { animation-delay: 0ms; }
+.fade-in-stagger > *:nth-child(2) { animation-delay: 100ms; }
+.fade-in-stagger > *:nth-child(3) { animation-delay: 200ms; }
+.fade-in-stagger > *:nth-child(4) { animation-delay: 300ms; }
+.fade-in-stagger > *:nth-child(5) { animation-delay: 400ms; }
 
 /* Gallery hover */
 .gallery-grid img {
   transition: transform 0.28s ease;
 }
+
 .gallery-grid img:hover {
   transform: scale(1.03);
 }

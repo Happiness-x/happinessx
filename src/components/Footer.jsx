@@ -15,9 +15,10 @@ export default function Footer() {
 
       {/* Navigation */}
       <div className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-3">
-        <Link to="/about" className="hover:text-cyan-300">About</Link>
-        <Link to="/services" className="hover:text-cyan-300">Services</Link>
-        <Link to="/how-it-works" className="hover:text-cyan-300">How It Works</Link>
+        <Link to="/learning" className="hover:text-cyan-300">Learning</Link>
+        <Link to="/quantum-therapeutic-touch" className="hover:text-cyan-300">Quantum Therapeutic Touch</Link>
+        <Link to="/womens-wellness" className="hover:text-cyan-300">Women’s Wellness</Link>
+        <Link to="/self-reflection" className="hover:text-cyan-300">Self-Reflection</Link>
         <Link to="/faq" className="hover:text-cyan-300">FAQ</Link>
         <Link to="/ethics-consent" className="hover:text-cyan-300">Ethics & Consent</Link>
         <Link to="/privacy-disclaimer" className="hover:text-cyan-300">Privacy & Disclaimer</Link>

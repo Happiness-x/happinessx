@@ -18,14 +18,14 @@ export default function Header({ onBookNow }) {
 
         {/* Center: Navigation */}
         <nav className="hidden md:flex gap-8 text-cyan-200">
-          {/* Decision: route 'Learning' via How It Works to encourage funnel flow while preserving direct access to learning resources. */}
           {[
             ["Home", "/"],
             ["About", "/about"],
-            ["Quantum", "/quantum-healing"],
+            ["Services", "/services"],
+            ["How It Works", "/how-it-works"],
             ["Gallery", "/gallery"],
             ["Blog", "/blog"],
-            ["Learning", "/how-it-works?path=learning"],
+            ["Contact Us", "/contact"],
           ].map(([label, path]) => (
             <NavLink
               key={path}

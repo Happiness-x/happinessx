@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import Header from "./components/Header";
@@ -20,12 +20,14 @@ import QuantumHealing from "./pages/QuantumHealing";
 import Gallery from "./pages/Gallery";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
-import LearnMore from "./pages/LearnMore";
+import SelfReflection from "./pages/SelfReflection";
 import SessionDetails from "./pages/SessionDetails";
 import ReflectionResults from "./pages/ReflectionResults";
 import Book from "./pages/Book";
 import PillarEssay from "./pages/PillarEssay";
 import WomensWellness from "./pages/WomensWellness";
+import Learning from "./pages/Learning";
+import Contact from "./pages/Contact";
 
 export default function App() {
   const [bookingOpen, setBookingOpen] = useState(false);
@@ -56,22 +58,24 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/how-it-works" element={<HowItWorks />} />
+            <Route path="/learning" element={<Learning />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/ethics-consent" element={<EthicsConsent />} />
             <Route path="/privacy-disclaimer" element={<PrivacyDisclaimer />} />
             <Route path="/code-of-conduct" element={<CodeOfConduct />} />
             <Route path="/terms-cancellation" element={<TermsCancellation />} />
-            <Route path="/quantum-healing" element={<QuantumHealing />} />
+            <Route path="/quantum-therapeutic-touch" element={<QuantumHealing />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:id" element={<BlogPost />} />
-            <Route path="/learn" element={<LearnMore />} />
-            <Route path="/self-reflection" element={<LearnMore />} />
+            <Route path="/learn" element={<Navigate to="/self-reflection" replace />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/self-reflection" element={<SelfReflection />} />
             <Route path="/session-details" element={<SessionDetails />} />
             <Route path="/reflection-results" element={<ReflectionResults />} />
             <Route path="/book" element={<Book />} />
             <Route path="/essay/why-women-carry-sensation" element={<PillarEssay />} />
-            <Route path="/WomensWellness" element={<WomensWellness />} />
+            <Route path="/womens-wellness" element={<WomensWellness />} />
           </Routes>
         </main>
 

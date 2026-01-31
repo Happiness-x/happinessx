@@ -14,7 +14,7 @@ export default function SessionDetails() {
 
   return (
     <PageWrapper>
-      <div className={`max-w-4xl mx-auto px-6 py-24 text-gray-200 space-y-16 transition-all duration-700 ease-out ${reveal}`}>
+      <div className={`max-w-4xl mx-auto px-6 py-24 text-gray-200 space-y-12 transition-all duration-700 ease-out ${reveal}`}>
         {/* decorative abstract header */}
         <div aria-hidden className="pointer-events-none mb-4">
           <svg width="100%" height="48" viewBox="0 0 800 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-40">
@@ -28,11 +28,11 @@ export default function SessionDetails() {
           </svg>
         </div>
         {/* ================= SECTION 1: TITLE & FRAMING ================= */}
-        <section className="space-y-6">
-          <h1 className="text-4xl md:text-5xl text-cyan-300 font-semibold">
+        <section className="space-y-6 text-center">
+          <h1 className="text-5xl text-cyan-300 font-semibold">
             Guided Awareness Session — What to Expect
           </h1>
-          <p className="text-lg leading-relaxed">
+          <p className="text-lg leading-relaxed text-gray-300 max-w-2xl mx-auto">
             This page describes the structure and experience of a guided awareness session. 
             It's meant to answer questions and reduce uncertainty — not to persuade or promise outcomes. 
             A session is a calm, online experience focused on presence and internal listening, conducted entirely by you 
@@ -244,7 +244,7 @@ export default function SessionDetails() {
               Continue to Booking (Optional)
             </button>
             <a
-              href="/learn"
+              href="/self-reflection"
               className="px-8 py-4 rounded-full border border-cyan-500 text-cyan-300 font-semibold hover:bg-cyan-900/30 transition text-center"
             >
               Return to Self-Reflection
