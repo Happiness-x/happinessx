@@ -13,6 +13,9 @@ export default function PrivacyDisclaimer() {
           communication, and service delivery. Data is not sold or shared
           with third parties except where legally required.
         </p>
+        <p>
+          Reflections submitted through forms may be temporarily stored in your browser's localStorage and will only be emailed if you explicitly consent to that action. Reflection content is not logged by server email handlers and is not shared without your permission.
+        </p>
 
         <h2 className="text-2xl text-cyan-300">Confidentiality Limits</h2>
         <p>

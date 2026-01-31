@@ -17,11 +17,6 @@ export default function ShortIntakeForm() {
 
     if (response.ok) {
       setSubmitted(true);
-
-      // Gentle pause, then open Calendly
-      setTimeout(() => {
-        window.dispatchEvent(new Event("open-booking"));
-      }, 1200);
     }
   }
 
@@ -36,7 +31,8 @@ export default function ShortIntakeForm() {
           This helps orient the session with care, pacing, and respect.
         </p>
         <p className="text-xs text-gray-500 mt-6 italic">
-          You’ll be guided to scheduling shortly.
+          You can view session details or proceed to booking when you're ready.
+          <a href="/session-details" className="text-cyan-300 underline ml-2">View session details</a>
         </p>
       </section>
     );

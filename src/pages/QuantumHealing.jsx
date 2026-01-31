@@ -31,12 +31,19 @@ export default function QuantumHealing() {
           Quantum Therapeutic Touch
         </h1>
 
+        <p className="text-center text-gray-400 mb-6">
+          The term "quantum" is used here as a symbolic metaphor to describe subtle shifts in perception arising from steady attention. It is not a claim about physics or energy transmission.
+        </p>
+
         {/* ================= INTRO ================= */}
         <section className="mb-20 space-y-6 text-sm sm:text-base md:text-lg">
           <p>
             Quantum Therapeutic Touch is a complementary wellness practice
             centered on awareness, presence, and internal signal clarity.
             Sessions are non-invasive, non-directive, and conducted exclusively online.
+          </p>
+          <p className="text-sm text-gray-400 mt-4 text-center">
+            For a practical explanation of distance-based work, see <a href="/why-distance" className="text-cyan-300 underline">Why Distance Is Not a Barrier</a>.
           </p>
 
           <p>
@@ -122,7 +129,16 @@ export default function QuantumHealing() {
           </p>
         </section>
 
-        {/* ================= HOW COMMUNICATION OCCURS ================= */}
+        {/* ================= NEXT STEP CTA ================= */}
+        <section className="text-center border-t border-cyan-900 pt-12">
+          <p className="text-gray-300 mb-6">Ready to understand the session structure and process?</p>
+          <a
+            href="/how-it-works?path=quantum"
+            className="inline-block px-8 py-3 rounded-full bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition"
+          >
+            Explore How This Works
+          </a>
+        </section>
         <section className="mb-28">
           <h2 className="text-3xl text-cyan-300 font-semibold mb-6 text-center">
             How Communication Occurs Without Words

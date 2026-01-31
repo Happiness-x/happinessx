@@ -5,6 +5,9 @@ import PageWrapper from "../components/PageWrapper";
 export default function Learning() {
   const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
+  const [formState, setFormState] = useState({ name: "", email: "", agreed: false });
+
+  const allRequired = formState.name.trim() && formState.email.trim() && formState.agreed;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -16,6 +19,19 @@ export default function Learning() {
         body: formData,
         headers: { Accept: "application/json" },
       });
+
+      // Build a reflection object from form values
+      const reflection = {
+        name: formData.get("name") || "",
+        email: formData.get("email") || "",
+        intent: formData.get("intent") || "",
+        body_awareness: formData.get("body_awareness") || "",
+        emotional_state: formData.get("emotional_state") || "",
+        submittedAt: new Date().toISOString(),
+      };
+
+      // Persist so ReflectionResults can read it on direct load
+      try { window.localStorage.setItem("hx_reflection", JSON.stringify(reflection)); } catch(e){}
 
       // Show submitted UI regardless of Formspree result
       setSubmitted(true);
@@ -53,7 +69,7 @@ export default function Learning() {
     }
 
     // Navigate to reflection results immediately (do not wait for email send)
-    navigate("/reflection-results");
+    navigate("/reflection-results", { state: reflection });
   }
 
   return (
@@ -187,21 +203,20 @@ export default function Learning() {
                 Pre-Session Reflection
               </h2>
 
-              <p className="text-center text-gray-300 text-sm mb-12 max-w-2xl mx-auto">
-                This short reflection supports pacing and understanding.
-                Share only what feels appropriate.
+              <p className="text-center text-gray-300 text-sm mb-4 max-w-2xl mx-auto">
+                Nothing here is interpreted or stored beyond this session. Share only what feels appropriate.
               </p>
 
-              <form
-                onSubmit={handleSubmit}
-                className="max-w-3xl mx-auto space-y-8"
-              >
+              <div className="text-center text-xs text-gray-400 mb-8">Step 2 of 4</div>
+
+              <form onSubmit={handleSubmit} className="max-w-3xl mx-auto space-y-8">
                 <input
                   type="text"
                   name="name"
                   placeholder="Your name"
                   required
                   className="w-full bg-black border border-cyan-800 rounded-lg p-3"
+                  onChange={(e)=>setFormState(s=>({...s, name:e.target.value}))}
                 />
 
                 <input
@@ -210,6 +225,7 @@ export default function Learning() {
                   placeholder="Email address"
                   required
                   className="w-full bg-black border border-cyan-800 rounded-lg p-3"
+                  onChange={(e)=>setFormState(s=>({...s, email:e.target.value}))}
                 />
 
                 <textarea
@@ -238,14 +254,15 @@ export default function Learning() {
                 </select>
 
                 <label className="flex items-start gap-3 text-xs text-gray-400">
-                  <input type="checkbox" required />
+                  <input type="checkbox" required onChange={(e)=>setFormState(s=>({...s, agreed:e.target.checked}))} />
                   I understand this is complementary, non-medical wellness support.
                 </label>
 
                 <div className="text-center pt-6">
                   <button
                     type="submit"
-                    className="px-10 py-3 rounded-full bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition"
+                    className="px-10 py-3 rounded-full bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={!allRequired}
                   >
                     Submit Reflection
                   </button>

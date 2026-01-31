@@ -77,16 +77,15 @@ export default function Learning() {
 
       {/* CTA */}
       <div className="text-center">
-        <button
-          onClick={() => {
-            if (typeof window !== "undefined") {
-              window.dispatchEvent(new Event("open-booking"));
-            }
-          }}
-          className="px-10 py-4 rounded-full bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition"
+        <a
+          href="/how-it-works?path=learning"
+          className="px-10 py-4 rounded-full bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition inline-block"
         >
-          Schedule a Release Session
-        </button>
+          Learn How Sessions Work
+        </a>
+        <div className="mt-4 text-sm">
+          <a href="/essay/why-women-carry-sensation" className="text-cyan-300 underline">Read: When the Body Holds What the Mind Can’t Say</a>
+        </div>
       </div>
     </div>
   );

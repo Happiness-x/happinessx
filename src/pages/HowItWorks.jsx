@@ -1,17 +1,41 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import PageWrapper from "../components/PageWrapper";
 
 export default function HowItWorks() {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const path = params.get("path");
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduceMotion(media.matches);
+    const handler = () => setReduceMotion(media.matches);
+    media.addEventListener("change", handler);
+    return () => media.removeEventListener("change", handler);
+  }, []);
+
+  const motionProps = reduceMotion
+    ? { initial: {}, whileInView: {}, transition: {} }
+    : { initial: { opacity: 0, y: 24 }, whileInView: { opacity: 1, y: 0 }, transition: { duration: 0.8, ease: "easeOut" }, viewport: { once: true } };
+
+  // tone adjustments
+  const toneAdjust = {
+    quantum: "This perspective uses symbolic and metaphorical language to help some people make sense of subtle experience.",
+    women: "This path adds reassurance, normalization, and explicit attention to safety and consent for women.",
+    learning: "This section takes an educational tone focused on practice and gentle skills for awareness.",
+    guided: "This path emphasizes practical structure, pacing, and what to expect in a guided session.",
+  }[path];
   return (
     <PageWrapper>
       <div className="relative z-10 max-w-5xl mx-auto px-6 py-24 text-gray-200">
 
         {/* ================= PAGE INTRO ================= */}
         <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: "easeOut" }}
-          viewport={{ once: true }}
+          {...motionProps}
           className="mb-24 text-center"
         >
           <h1 className="text-4xl md:text-5xl text-cyan-300 font-semibold mb-8">
@@ -30,16 +54,14 @@ export default function HowItWorks() {
             Each session is structured to allow the nervous system to settle
             naturally and for inner awareness to emerge at the client’s own pace.
           </p>
+
+          {toneAdjust && (
+            <p className="mt-4 max-w-3xl mx-auto text-sm text-gray-300">{toneAdjust}</p>
+          )}
         </motion.section>
 
         {/* ================= STEP 1 ================= */}
-        <motion.section
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="mb-20"
-        >
+        <motion.section {...motionProps} className="mb-20">
           <h2 className="text-2xl md:text-3xl text-cyan-300 font-semibold mb-4">
             1. Settling & Orientation
           </h2>
@@ -54,11 +76,8 @@ export default function HowItWorks() {
 
         {/* ================= STEP 2 ================= */}
         <motion.section
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="mb-20"
+           {...motionProps}
+           className="mb-20"
         >
           <h2 className="text-2xl md:text-3xl text-cyan-300 font-semibold mb-4">
             2. Awareness of Breath & Posture
@@ -78,11 +97,8 @@ export default function HowItWorks() {
 
         {/* ================= STEP 3 ================= */}
         <motion.section
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="mb-20"
+           {...motionProps}
+           className="mb-20"
         >
           <h2 className="text-2xl md:text-3xl text-cyan-300 font-semibold mb-4">
             3. Non-Verbal Guidance
@@ -125,11 +141,8 @@ export default function HowItWorks() {
 
         {/* ================= STEP 5 ================= */}
         <motion.section
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="mb-28"
+           {...motionProps}
+           className="mb-28"
         >
           <h2 className="text-2xl md:text-3xl text-cyan-300 font-semibold mb-4">
             5. Integration & Closure
@@ -147,13 +160,7 @@ export default function HowItWorks() {
         </motion.section>
 
         {/* ================= NON-VERBAL COMMUNICATION ================= */}
-        <motion.section
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="border-t border-cyan-900 pt-20"
-        >
+        <motion.section {...motionProps} className="border-t border-cyan-900 pt-20">
           <h2 className="text-3xl md:text-4xl text-cyan-300 font-semibold mb-8 text-center">
             How We Communicate Without Words
           </h2>
@@ -189,6 +196,13 @@ export default function HowItWorks() {
             Complementary wellness support · Non-directive · Non-invasive · Client-led
           </p>
         </motion.section>
+
+        {/* Is this the right kind of experience? */}
+        <section className="mt-12 text-center border-t border-cyan-900 pt-10">
+          <h3 className="text-2xl text-cyan-300 font-semibold mb-4">Is this the right kind of experience for you?</h3>
+          <p className="text-gray-300 mb-6">If you're curious, consider a brief private self-reflection to see how this approach fits.</p>
+          <a href="/self-reflection" className="inline-block px-8 py-3 rounded-full bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition" style={{minHeight:44}}>Am I the Right Person for This?</a>
+        </section>
 
       </div>
     </PageWrapper>

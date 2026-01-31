@@ -150,18 +150,11 @@ export default function Home() {
 
           <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="/learn"
+              href="/services"
               className="px-6 py-3 rounded-full bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition text-center"
-              aria-label="Begin private self-reflection"
+              aria-label="Explore services"
             >
-              Begin Private Self‑Reflection
-            </a>
-
-            <a
-              href="/how-it-works"
-              className="px-6 py-3 rounded-full border border-cyan-500 text-cyan-300 font-semibold hover:bg-cyan-900/30 transition text-center"
-            >
-              Learn How It Works
+              Explore Services
             </a>
           </div>
 
@@ -214,17 +207,53 @@ export default function Home() {
             <ul className="list-disc list-inside space-y-2 text-gray-300 ml-2">
               <li>Not therapy or clinical treatment</li>
               <li>Not medical care</li>
-              <li>Not sexual or physical contact</li>
+              <li>No physical contact</li>
               <li>Not interpretation, diagnosis, or advice</li>
             </ul>
           </div>
         </div>
-
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-sm text-gray-400">
             Primary CTA: Begin with a private, anonymous self-reflection snippet —
             experience-based, not outcome-based.
           </p>
+        </div>
+      </PetalSection>
+
+      {/* ================= SERVICE PREVIEW ================= */}
+      <PetalSection delay={120}>
+        <h2 className="text-3xl md:text-4xl text-cyan-300 font-semibold text-center mb-8">
+          Service Preview
+        </h2>
+
+        <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <a href="/how-it-works?path=quantum" className="group block bg-black/50 border border-cyan-900 rounded-lg p-6 hover:scale-[1.01] transition-transform focus:outline-none">
+            <h3 className="text-cyan-300 font-semibold mb-2">Quantum Therapeutic Touch</h3>
+            <p className="text-sm text-gray-300 mb-4">A perspective-friendly approach for thinkers and skeptics.</p>
+            <p className="text-xs text-gray-400">This is informational only.</p>
+          </a>
+
+          <a href="/how-it-works?path=women" className="group block bg-black/50 border border-cyan-900 rounded-lg p-6 hover:scale-[1.01] transition-transform focus:outline-none">
+            <h3 className="text-cyan-300 font-semibold mb-2">Women’s-Focused Awareness Session</h3>
+            <p className="text-sm text-gray-300 mb-4">Permission, safety, and paced presence for women.</p>
+            <p className="text-xs text-gray-400">This is informational only.</p>
+          </a>
+
+          <a href="/how-it-works?path=learning" className="group block bg-black/50 border border-cyan-900 rounded-lg p-6 hover:scale-[1.01] transition-transform focus:outline-none">
+            <h3 className="text-cyan-300 font-semibold mb-2">General Somatic Awareness Support</h3>
+            <p className="text-sm text-gray-300 mb-4">For learners curious about body-based awareness.</p>
+            <p className="text-xs text-gray-400">This is informational only.</p>
+          </a>
+
+          <a href="/how-it-works?path=guided" className="group block bg-black/50 border border-cyan-900 rounded-lg p-6 hover:scale-[1.01] transition-transform focus:outline-none">
+            <h3 className="text-cyan-300 font-semibold mb-2">Private Guided Wellness Session</h3>
+            <p className="text-sm text-gray-300 mb-4">A cautious, private one-to-one guided experience.</p>
+            <p className="text-xs text-gray-400">This is informational only.</p>
+          </a>
+        </div>
+
+        <div className="max-w-3xl mx-auto text-center mt-8">
+          <p className="text-sm text-gray-400">Private · Non-medical · Non-sexual · No obligation</p>
         </div>
       </PetalSection>
 

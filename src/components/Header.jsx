@@ -18,21 +18,20 @@ export default function Header({ onBookNow }) {
 
         {/* Center: Navigation */}
         <nav className="hidden md:flex gap-8 text-cyan-200">
+          {/* Decision: route 'Learning' via How It Works to encourage funnel flow while preserving direct access to learning resources. */}
           {[
             ["Home", "/"],
             ["About", "/about"],
             ["Quantum", "/quantum-healing"],
             ["Gallery", "/gallery"],
             ["Blog", "/blog"],
-            ["Learning", "/learn"],
+            ["Learning", "/how-it-works?path=learning"],
           ].map(([label, path]) => (
             <NavLink
               key={path}
               to={path}
               className={({ isActive }) =>
-                `hover:text-cyan-300 transition ${
-                  isActive ? "text-cyan-300" : ""
-                }`
+                `hover:text-cyan-300 transition ${isActive ? "text-cyan-300" : ""}`
               }
             >
               {label}
@@ -40,19 +39,18 @@ export default function Header({ onBookNow }) {
           ))}
         </nav>
 
-        {/* Right: Book Now */}
-        <button
-          onClick={() => window.dispatchEvent(new Event("open-booking"))}
+        {/* Right: Book (optional) — demoted visual emphasis and micro-copy to reduce pressure */}
+        <a
+          href="/book"
+          title="Booking is optional — available after you review session details"
           className="
-            ml-4 px-6 py-2 rounded-full
-            bg-cyan-500 text-black font-semibold
-            hover:bg-cyan-400 hover:scale-105
-            transition
-            shadow-lg
+            ml-4 px-4 py-1 rounded-full border border-cyan-600
+            bg-black/20 text-cyan-300 font-semibold text-sm
+            hover:bg-black/30 transition inline-flex items-center justify-center
           "
         >
-          Book Now
-        </button>
+          Book (optional)
+        </a>
       </div>
     </header>
   );

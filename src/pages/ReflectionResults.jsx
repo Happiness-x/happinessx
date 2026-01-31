@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import PageWrapper from "../components/PageWrapper";
 
 export default function ReflectionResults() {
@@ -6,6 +7,20 @@ export default function ReflectionResults() {
   const [resending, setResending] = useState(false);
   const [resendStatus, setResendStatus] = useState(null);
   const [userEmail, setUserEmail] = useState("");
+  const [emailConsent, setEmailConsent] = useState(false);
+  const location = useLocation();
+
+  // Load reflection data from navigation state or localStorage
+  const [reflection, setReflection] = useState(() => {
+    try {
+      const nav = location && location.state;
+      if (nav && Object.keys(nav).length) return nav;
+      const stored = window.localStorage.getItem("hx_reflection");
+      return stored ? JSON.parse(stored) : null;
+    } catch (e) {
+      return null;
+    }
+  });
 
   useEffect(() => {
     setMounted(true);
@@ -25,6 +40,37 @@ export default function ReflectionResults() {
       }
     }
   }, []);
+
+  // Determine archetype from reflection content
+  function determineArchetype(ref) {
+    if (!ref) return "Readiness";
+    const text = `${ref.intent} ${ref.body_awareness} ${ref.emotional_state}`.toLowerCase();
+    if (text.match(/tension|tight|stiff|knot|ache/)) return "Holding & Tension";
+    if (text.match(/heavy|weight|weighted|burden/)) return "Emotional Weight";
+    if (text.match(/numb|disconnected|fog|distant|empty/)) return "Disconnection";
+    // default
+    return "Readiness";
+  }
+
+  const archetype = determineArchetype(reflection);
+  const archetypeText = {
+    "Holding & Tension": {
+      headline: "You're noticing holding and tension.",
+      body: "Your reflection highlights patterns of muscular holding and persistent physical tension. This often signals a habitual guarding response; awareness and gentle pacing can support release.",
+    },
+    "Emotional Weight": {
+      headline: "You're carrying emotional weight.",
+      body: "Your notes point to heavy feelings or burden. Naming these sensations and allowing small attention to them can be a steadying first step.",
+    },
+    "Disconnection": {
+      headline: "You may feel disconnected or numb.",
+      body: "Your reflection suggests distance from sensation or emotion. Simple practices of curiosity and micro-attention can help re-establish contact gradually.",
+    },
+    "Readiness": {
+      headline: "You're in a place of readiness.",
+      body: "Your reflection shows openness or a calm curiosity that often supports deeper exploration. A guided presence can deepen this sense safely.",
+    },
+  }[archetype];
 
   const reveal = mounted
     ? "opacity-100 translate-y-0"
@@ -79,11 +125,10 @@ export default function ReflectionResults() {
         {/* ================= HEADER ================= */}
         <section className="space-y-6 text-center">
           <h1 className="text-4xl md:text-5xl text-cyan-300 font-semibold">
-            Your Reflection Has Been Received
+            {archetypeText.headline}
           </h1>
           <p className="text-lg leading-relaxed max-w-2xl mx-auto text-gray-300">
-            Thank you for taking time to pause and listen to your own inner experience.
-            That attention is itself a form of care.
+            {archetypeText.body}
           </p>
         </section>
 
@@ -164,21 +209,70 @@ export default function ReflectionResults() {
               If you didn't receive the acknowledgement email, you can request it again below.
             </p>
 
-            <input
-              type="email"
-              value={userEmail}
-              onChange={(e) => setUserEmail(e.target.value)}
-              placeholder="Enter your email address"
-              className="w-full bg-black border border-cyan-800 rounded-lg p-3 text-gray-200 placeholder-gray-500"
-            />
+            <div className="space-y-3">
+              <label className="block text-sm text-gray-400">Email to resend to</label>
+              <input
+                type="email"
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
+                placeholder={reflection?.email || "Enter your email address"}
+                className="w-full bg-black border border-cyan-800 rounded-lg p-3 text-gray-200 placeholder-gray-500"
+              />
 
-            <button
-              onClick={handleResendEmail}
-              disabled={resending}
-              className="w-full px-6 py-3 rounded-full bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {resending ? "Sending..." : "Resend Email"}
-            </button>
+              <div className="flex gap-3">
+                <button
+                  onClick={handleResendEmail}
+                  disabled={resending}
+                  className="flex-1 px-6 py-3 rounded-full bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {resending ? "Sending..." : "Resend Email"}
+                </button>
+
+                <button
+                  onClick={async () => {
+                    // Email this reflection to user (optional save)
+                    const target = reflection?.email || userEmail;
+                    if (!target) {
+                      setResendStatus({ type: "error", message: "Enter an email first." });
+                      return;
+                    }
+
+                    setResending(true);
+                    try {
+                      const bodyHtml = `
+                        <h2>Your Personal Reflection</h2>
+                        <p>${archetypeText.headline}</p>
+                        <p>${archetypeText.body}</p>
+                        <hr />
+                        <h3>Your submitted notes</h3>
+                        <p><strong>Intent:</strong> ${reflection?.intent || ""}</p>
+                        <p><strong>Body awareness:</strong> ${reflection?.body_awareness || ""}</p>
+                      `;
+
+                      const resp = await fetch("/api/send-reflection-email", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email: target, subject: "Your Reflection", html: bodyHtml }),
+                      });
+
+                      if (resp.ok) {
+                        setResendStatus({ type: "success", message: "Reflection emailed." });
+                        try { if (typeof window !== "undefined" && window.gtag) window.gtag("event","reflection_save_email",{}); } catch(e){}
+                      } else {
+                        setResendStatus({ type: "error", message: "Failed to send reflection." });
+                      }
+                    } catch (err) {
+                      setResendStatus({ type: "error", message: "Network error." });
+                    } finally {
+                      setResending(false);
+                    }
+                  }}
+                  className="px-4 py-3 rounded-full border border-cyan-700 text-cyan-300"
+                >
+                  Email this reflection to me privately
+                </button>
+              </div>
+            </div>
 
             {resendStatus && (
               <div

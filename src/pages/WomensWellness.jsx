@@ -15,16 +15,12 @@ export default function WomensWellness() {
             awareness, emotional grounding, and reconnection with your body’s
             natural rhythms—without force or expectation.
           </p>
-          <button
-            onClick={() => {
-              if (typeof window !== "undefined") {
-                window.dispatchEvent(new Event("open-booking"));
-              }
-            }}
-            className="mt-6 px-8 py-4 bg-cyan-500 text-black rounded-full font-semibold hover:bg-cyan-400 transition"
+          <a
+            href="/how-it-works?path=women"
+            className="mt-6 inline-block px-8 py-4 bg-cyan-500 text-black rounded-full font-semibold hover:bg-cyan-400 transition"
           >
-            Schedule a Session
-          </button>
+            Check Eligibility
+          </a>
           <p className="text-gray-400 text-sm mt-2">
             Confidential · Client-led · Non-medical
           </p>
