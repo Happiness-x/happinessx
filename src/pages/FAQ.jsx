@@ -1,14 +1,19 @@
 export default function FAQ() {
   return (
-    <div className="max-w-5xl mx-auto px-6 py-24 text-gray-200">
-      <h1 className="text-4xl text-cyan-300 font-semibold mb-16 text-center">
-        Frequently Asked Questions
-      </h1>
+    <div className="max-w-4xl mx-auto px-6 py-24 text-gray-200 space-y-12">
+      <section className="text-center space-y-4">
+        <h1 className="text-5xl text-cyan-300 font-semibold">
+          Frequently Asked Questions
+        </h1>
+        <p className="text-lg text-gray-300 leading-relaxed">
+          Common questions about what we offer and how it works.
+        </p>
+      </section>
 
-      <div className="space-y-12 leading-relaxed">
+      <div className="space-y-8">
 
-        <section>
-          <h3 className="text-xl text-cyan-300 mb-3">
+        <section className="space-y-2">
+          <h3 className="text-xl text-cyan-300 font-semibold">
             What kind of service does Happiness X provide?
           </h3>
           <p>

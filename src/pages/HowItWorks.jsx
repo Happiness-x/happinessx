@@ -31,32 +31,27 @@ export default function HowItWorks() {
   }[path];
   return (
     <PageWrapper>
-      <div className="relative z-10 max-w-5xl mx-auto px-6 py-24 text-gray-200">
+      <div className="relative z-10 max-w-4xl mx-auto px-6 py-24 text-gray-200 space-y-12">
 
         {/* ================= PAGE INTRO ================= */}
         <motion.section
           {...motionProps}
-          className="mb-24 text-center"
+          className="text-center space-y-6"
         >
-          <h1 className="text-4xl md:text-5xl text-cyan-300 font-semibold mb-8">
+          <h1 className="text-5xl text-cyan-300 font-semibold">
             How It Works
           </h1>
 
-          <p className="max-w-3xl mx-auto leading-relaxed text-sm sm:text-base md:text-lg">
-            Sessions at Happiness X are designed to support awareness, relaxation,
-            and self-regulation through a calm, non-directive, and client-led
-            process. The approach emphasizes presence, attentiveness, and subtle
-            non-verbal communication rather than force, instruction, or
-            intervention.
+          <p className="text-lg leading-relaxed text-gray-300 max-w-2xl mx-auto">
+            Sessions are designed to support awareness, relaxation, and self-regulation through a calm, non-directive, and client-led process.
           </p>
 
-          <p className="max-w-3xl mx-auto mt-6 leading-relaxed text-sm sm:text-base md:text-lg">
-            Each session is structured to allow the nervous system to settle
-            naturally and for inner awareness to emerge at the client’s own pace.
+          <p className="text-lg leading-relaxed text-gray-300 max-w-2xl mx-auto">
+            Each session allows the nervous system to settle naturally and for inner awareness to emerge at your own pace.
           </p>
 
           {toneAdjust && (
-            <p className="mt-4 max-w-3xl mx-auto text-sm text-gray-300">{toneAdjust}</p>
+            <p className="text-base text-gray-400 max-w-2xl mx-auto">{toneAdjust}</p>
           )}
         </motion.section>
 

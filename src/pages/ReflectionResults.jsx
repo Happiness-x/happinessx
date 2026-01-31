@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import PageWrapper from "../components/PageWrapper";
 
 export default function ReflectionResults() {
-  const [mounted, setMounted] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
   const [resending, setResending] = useState(false);
   const [resendStatus, setResendStatus] = useState(null);
   const [userEmail, setUserEmail] = useState("");
@@ -23,8 +24,15 @@ export default function ReflectionResults() {
   });
 
   useEffect(() => {
-    setMounted(true);
+    if (typeof window === "undefined") return;
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduceMotion(media.matches);
+    const handler = () => setReduceMotion(media.matches);
+    media.addEventListener("change", handler);
+    return () => media.removeEventListener("change", handler);
+  }, []);
 
+  useEffect(() => {
     // Client-side analytics + safe logging
     const isBrowser = typeof window !== "undefined" && typeof document !== "undefined";
     if (isBrowser) {
@@ -117,23 +125,46 @@ export default function ReflectionResults() {
     }
   }
 
+  const containerVariants = reduceMotion ? {} : {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = reduceMotion ? {} : {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
   return (
     <PageWrapper>
-      <div
-        className={`max-w-4xl mx-auto px-6 py-24 text-gray-200 space-y-12 transition-all duration-700 ease-out ${reveal}`}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        variants={containerVariants}
+        className="max-w-4xl mx-auto px-6 py-24 text-gray-200 space-y-12"
       >
         {/* ================= HEADER ================= */}
-        <section className="space-y-6 text-center">
+        <motion.section variants={itemVariants} className="space-y-6 text-center">
           <h1 className="text-5xl text-cyan-300 font-semibold">
             {archetypeText.headline}
           </h1>
           <p className="text-lg leading-relaxed max-w-2xl mx-auto text-gray-300">
             {archetypeText.body}
           </p>
-        </section>
+        </motion.section>
 
         {/* ================= NEUTRAL SUMMARY ================= */}
-        <section className="bg-black/50 border border-cyan-900 rounded-lg p-8 space-y-4">
+        <motion.section variants={itemVariants} className="bg-black/50 border border-cyan-900 rounded-lg p-8 space-y-4">
           <h2 className="text-2xl text-cyan-300 font-semibold">What Happens Next</h2>
           <div className="space-y-3 text-gray-300">
             <p>
@@ -149,10 +180,10 @@ export default function ReflectionResults() {
               All information remains confidential. You are under no obligation to proceed.
             </p>
           </div>
-        </section>
+        </motion.section>
 
         {/* ================= EXPLORATION PATH ================= */}
-        <section className="space-y-6">
+        <motion.section variants={itemVariants} className="space-y-6">
           <h2 className="text-2xl text-cyan-300 font-semibold text-center">
             Your Next Steps (All Optional)
           </h2>
@@ -196,10 +227,10 @@ export default function ReflectionResults() {
               </button>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* ================= EMAIL RESEND ================= */}
-        <section className="border-t border-cyan-900 pt-8 space-y-6">
+        <motion.section variants={itemVariants} className="border-t border-cyan-900 pt-8 space-y-6">
           <h2 className="text-2xl text-cyan-300 font-semibold text-center">
             Resend Acknowledgement Email
           </h2>
@@ -286,27 +317,27 @@ export default function ReflectionResults() {
               </div>
             )}
           </div>
-        </section>
+        </motion.section>
 
         {/* ================= FOOTER NOTE ================= */}
-        <section className="space-y-4 pt-8 border-t border-gray-700 text-xs text-gray-500">
+        <motion.section variants={itemVariants} className="space-y-4 pt-8 border-t border-gray-700 text-xs text-gray-500">
           <p>
             This service is not a substitute for medical treatment, psychotherapy, or
             emergency mental health care. If you are in crisis or experiencing a mental
             health emergency, please contact a healthcare provider or crisis line.
           </p>
-        </section>
+        </motion.section>
 
         {/* ================= RETURN HOME ================= */}
-        <section className="text-center pt-8">
+        <motion.section variants={itemVariants} className="text-center pt-8">
           <a
             href="/"
-            className="text-gray-400 hover:text-gray-200 transition underline"
+            className="btn-secondary"
           >
             Return Home
           </a>
-        </section>
-      </div>
+        </motion.section>
+      </motion.div>
     </PageWrapper>
   );
 }

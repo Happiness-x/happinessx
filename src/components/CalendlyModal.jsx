@@ -65,8 +65,11 @@ export default function CalendlyModal({ open, onClose }) {
       >
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 z-10 text-cyan-300 hover:text-white text-2xl"
-          aria-label="Close booking"
+          className="absolute top-4 right-4 z-10 text-cyan-300 hover:text-white text-2xl
+                     focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300
+                     rounded-lg transition"
+          aria-label="Close booking modal"
+          title="Close"
         >
           ✕
         </button>

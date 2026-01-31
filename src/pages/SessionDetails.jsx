@@ -1,20 +1,51 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import PageWrapper from "../components/PageWrapper";
 
 export default function SessionDetails() {
-  const [mounted, setMounted] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    if (typeof window === "undefined") return;
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduceMotion(media.matches);
+    const handler = () => setReduceMotion(media.matches);
+    media.addEventListener("change", handler);
+    return () => media.removeEventListener("change", handler);
   }, []);
 
-  const reveal = mounted
-    ? "opacity-100 translate-y-0"
-    : "opacity-0 translate-y-3 motion-reduce:opacity-100 motion-reduce:translate-y-0";
+  const motionProps = reduceMotion
+    ? { initial: {}, whileInView: {}, transition: {} }
+    : { initial: { opacity: 0, y: 24 }, whileInView: { opacity: 1, y: 0 }, transition: { duration: 0.8, ease: "easeOut" }, viewport: { once: true } };
+
+  const containerVariants = reduceMotion ? {} : {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = reduceMotion ? {} : {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
 
   return (
     <PageWrapper>
-      <div className={`max-w-4xl mx-auto px-6 py-24 text-gray-200 space-y-12 transition-all duration-700 ease-out ${reveal}`}>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        variants={containerVariants}
+        className="max-w-4xl mx-auto px-6 py-24 text-gray-200 space-y-12"
+      >
         {/* decorative abstract header */}
         <div aria-hidden className="pointer-events-none mb-4">
           <svg width="100%" height="48" viewBox="0 0 800 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-40">
@@ -28,7 +59,7 @@ export default function SessionDetails() {
           </svg>
         </div>
         {/* ================= SECTION 1: TITLE & FRAMING ================= */}
-        <section className="space-y-6 text-center">
+        <motion.section variants={itemVariants} className="space-y-6 text-center">
           <h1 className="text-5xl text-cyan-300 font-semibold">
             Guided Awareness Session — What to Expect
           </h1>
@@ -38,10 +69,10 @@ export default function SessionDetails() {
             A session is a calm, online experience focused on presence and internal listening, conducted entirely by you 
             and a practitioner in separate, private spaces.
           </p>
-        </section>
+        </motion.section>
 
         {/* ================= SECTION 2: WHO THIS SESSION IS FOR ================= */}
-        <section className="space-y-6">
+        <motion.section variants={itemVariants} className="space-y-6">
           <h2 className="text-3xl text-cyan-300 font-semibold">Who This Session May Be Supportive For</h2>
           <ul className="list-disc list-inside space-y-3 text-gray-300 ml-2">
             <li>People seeking relaxation and rest in a structured, guided setting</li>
@@ -50,10 +81,10 @@ export default function SessionDetails() {
             <li>People wanting support without direction, diagnosis, or interpretation</li>
             <li>People interested in exploring awareness practices in a safe, non-medical container</li>
           </ul>
-        </section>
+        </motion.section>
 
         {/* ================= SECTION 3: WHO THIS SESSION IS NOT FOR ================= */}
-        <section className="space-y-6 border-l-2 border-cyan-900 pl-6">
+        <motion.section variants={itemVariants} className="space-y-6 border-l-2 border-cyan-900 pl-6">
           <h2 className="text-3xl text-cyan-300 font-semibold">What This Session Is Not</h2>
           <p className="text-gray-400 italic mb-4">
             Clarity about boundaries builds trust. Here is what a guided awareness session does not include:
@@ -66,10 +97,10 @@ export default function SessionDetails() {
             <li>Promises of symptom relief, healing, or transformation</li>
             <li>Advice or interpretation of what you experience</li>
           </ul>
-        </section>
+        </motion.section>
 
         {/* ================= SECTION 4: SESSION TIMELINE ================= */}
-        <section className="space-y-6">
+        <motion.section variants={itemVariants} className="space-y-6">
           <h2 className="text-3xl text-cyan-300 font-semibold">How a Session Unfolds</h2>
 
           {/* Before */}
@@ -136,10 +167,10 @@ export default function SessionDetails() {
               </p>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* ================= SECTION 5: PRACTITIONER ROLES ================= */}
-        <section className="space-y-6">
+        <motion.section variants={itemVariants} className="space-y-6">
           <h2 className="text-3xl text-cyan-300 font-semibold">What the Practitioner Does & Does Not Do</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {/* Does */}
@@ -166,10 +197,10 @@ export default function SessionDetails() {
               </ul>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* ================= SECTION 6: COMMON EXPERIENCES ================= */}
-        <section className="space-y-6">
+        <motion.section variants={itemVariants} className="space-y-6">
           <h2 className="text-3xl text-cyan-300 font-semibold">What People Experience (All Are Valid)</h2>
           <p className="text-gray-400 mb-4">
             Sessions vary widely. Here are common experiences people report — and equally important, 
@@ -201,10 +232,10 @@ export default function SessionDetails() {
               <p className="text-gray-300 text-sm mt-1">Each person's experience is unique, and that is expected</p>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* ================= SECTION 7: AUTONOMY & CONSENT ================= */}
-        <section className="space-y-6 border-t border-cyan-900 pt-8">
+        <motion.section variants={itemVariants} className="space-y-6 border-t border-cyan-900 pt-8">
           <h2 className="text-3xl text-cyan-300 font-semibold">Your Choice Matters</h2>
           <div className="bg-black/50 border border-cyan-900 rounded-lg p-8 space-y-4 text-gray-300">
             <p>
@@ -224,10 +255,10 @@ export default function SessionDetails() {
               What you share stays with the practitioner.
             </p>
           </div>
-        </section>
+        </motion.section>
 
         {/* ================= SECTION 8: SOFT CTA ================= */}
-        <section className="space-y-6 pt-8 text-center">
+        <motion.section variants={itemVariants} className="space-y-6 pt-8 text-center">
           <p className="text-gray-400 italic">
             If you'd like to continue exploring, you may view booking information below. 
             There is no pressure — this page is meant for information only.
@@ -239,27 +270,27 @@ export default function SessionDetails() {
                   window.dispatchEvent(new Event("open-booking"));
                 }
               }}
-              className="px-8 py-4 rounded-full bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition"
+              className="btn-primary"
             >
               Continue to Booking (Optional)
             </button>
             <a
               href="/self-reflection"
-              className="px-8 py-4 rounded-full border border-cyan-500 text-cyan-300 font-semibold hover:bg-cyan-900/30 transition text-center"
+              className="btn-secondary"
             >
               Return to Self-Reflection
             </a>
           </div>
-        </section>
+        </motion.section>
 
         {/* ================= FOOTER DISCLAIMER ================= */}
-        <section className="space-y-4 pt-12 border-t border-gray-700 text-xs text-gray-500">
+        <motion.section variants={itemVariants} className="space-y-4 pt-12 border-t border-gray-700 text-xs text-gray-500">
           <p>
             This service is not a substitute for medical treatment, psychotherapy, or emergency mental health care. 
             If you are in crisis or experiencing a mental health emergency, please contact a healthcare provider or crisis line.
           </p>
-        </section>
-      </div>
+        </motion.section>
+      </motion.div>
     </PageWrapper>
   );
 }

@@ -74,18 +74,16 @@ export default function SelfReflection() {
 
   return (
     <PageWrapper>
-      <div className="max-w-5xl mx-auto px-6 py-24 text-gray-200">
+      <div className="max-w-4xl mx-auto px-6 py-24 text-gray-200 space-y-12">
 
         {/* ================= INTRO ================= */}
-        <section className="mb-24 text-center">
-          <h1 className="text-4xl md:text-5xl text-cyan-300 font-semibold mb-6">
+        <section className="text-center space-y-6">
+          <h1 className="text-5xl text-cyan-300 font-semibold">
             Learning & Understanding the Work
           </h1>
 
-          <p className="max-w-3xl mx-auto text-sm sm:text-base md:text-lg leading-relaxed text-gray-300">
-            This page is offered for those who wish to understand the principles,
-            language, and structure behind awareness-based wellness practices.
-            Nothing here is intended to convince — only to clarify.
+          <p className="text-lg leading-relaxed text-gray-300 max-w-2xl mx-auto">
+            This page clarifies the principles, language, and structure behind awareness-based wellness. Nothing here is intended to convince — only to clarify.
           </p>
         </section>
 
@@ -196,75 +194,94 @@ export default function SelfReflection() {
         </section>
 
         {/* ================= INTAKE FORM ================= */}
-        <section className="mt-24 border-t border-cyan-900 pt-20">
+        <section className="section-divider space-y-6">
           {!submitted ? (
             <>
-              <h2 className="text-3xl text-cyan-300 font-semibold mb-6 text-center">
-                Pre-Session Reflection
-              </h2>
+              <div className="text-center space-y-4">
+                <h2 className="text-2xl text-cyan-300 font-semibold">
+                  Pre-Session Reflection
+                </h2>
 
-              <p className="text-center text-gray-300 text-sm mb-4 max-w-2xl mx-auto">
-                Nothing here is interpreted or stored beyond this session. Share only what feels appropriate.
-              </p>
+                <p className="text-base text-gray-300 max-w-2xl mx-auto">
+                  Nothing here is interpreted or stored beyond this session. Share only what feels appropriate.
+                </p>
 
-              <div className="text-center text-xs text-gray-400 mb-8">Step 2 of 4</div>
+                <p className="text-xs text-gray-400">Step 2 of 4</p>
+              </div>
 
-              <form onSubmit={handleSubmit} className="max-w-3xl mx-auto space-y-8">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your name"
-                  required
-                  className="w-full bg-black border border-cyan-800 rounded-lg p-3"
-                  onChange={(e)=>setFormState(s=>({...s, name:e.target.value}))}
-                />
+              <form onSubmit={handleSubmit} className="max-w-3xl mx-auto space-y-6">
+                
+                <div className="space-y-2">
+                  <label className="block text-sm text-gray-400">Your name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    className="w-full"
+                    onChange={(e)=>setFormState(s=>({...s, name:e.target.value}))}
+                  />
+                </div>
 
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email address"
-                  required
-                  className="w-full bg-black border border-cyan-800 rounded-lg p-3"
-                  onChange={(e)=>setFormState(s=>({...s, email:e.target.value}))}
-                />
+                <div className="space-y-2">
+                  <label className="block text-sm text-gray-400">Email address</label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    className="w-full"
+                    onChange={(e)=>setFormState(s=>({...s, email:e.target.value}))}
+                  />
+                </div>
 
-                <textarea
-                  name="intent"
-                  rows="3"
-                  placeholder="What brings you to explore this session?"
-                  className="w-full bg-black border border-cyan-800 rounded-lg p-3"
-                />
+                <div className="space-y-2">
+                  <label className="block text-sm text-gray-400">What brings you to explore this session? <span className="text-gray-500">(optional)</span></label>
+                  <textarea
+                    name="intent"
+                    rows="3"
+                    className="w-full border-cyan-900/40"
+                  />
+                  <p className="microcopy-reassurance">You may skip this question.</p>
+                </div>
 
-                <textarea
-                  name="body_awareness"
-                  rows="2"
-                  placeholder="Any areas of bodily tension or fatigue you notice?"
-                  className="w-full bg-black border border-cyan-800 rounded-lg p-3"
-                />
+                <div className="space-y-2">
+                  <label className="block text-sm text-gray-400">Any areas of bodily tension or fatigue you notice? <span className="text-gray-500">(optional)</span></label>
+                  <textarea
+                    name="body_awareness"
+                    rows="2"
+                    className="w-full border-cyan-900/40"
+                  />
+                  <p className="microcopy-reassurance">You may skip this question.</p>
+                </div>
 
-                <select
-                  name="emotional_state"
-                  className="w-full bg-black border border-cyan-800 rounded-lg p-3"
-                >
-                  <option>Current emotional state (optional)</option>
-                  <option>Calm</option>
-                  <option>Stressed</option>
-                  <option>Emotionally heavy</option>
-                  <option>Neutral</option>
-                </select>
+                <div className="space-y-2">
+                  <label className="block text-sm text-gray-400">Current emotional state <span className="text-gray-500">(optional)</span></label>
+                  <select
+                    name="emotional_state"
+                    className="w-full"
+                  >
+                    <option>Select an option...</option>
+                    <option>Calm</option>
+                    <option>Stressed</option>
+                    <option>Emotionally heavy</option>
+                    <option>Neutral</option>
+                  </select>
+                </div>
 
-                <label className="flex items-start gap-3 text-xs text-gray-400">
-                  <input type="checkbox" required onChange={(e)=>setFormState(s=>({...s, agreed:e.target.checked}))} />
-                  I understand this is complementary, non-medical wellness support.
-                </label>
+                <div className="space-y-3 border-t border-cyan-900/20 pt-6">
+                  <label className="flex items-start gap-3 text-sm text-gray-300 cursor-pointer">
+                    <input type="checkbox" required className="mt-1" onChange={(e)=>setFormState(s=>({...s, agreed:e.target.checked}))} />
+                    <span>I understand this is complementary, non-medical wellness support, not therapy or medical treatment.</span>
+                  </label>
+                  <p className="microcopy-reassurance text-xs">Your consent is required to proceed.</p>
+                </div>
 
-                <div className="text-center pt-6">
+                <div className="text-center pt-4">
                   <button
                     type="submit"
-                    className="px-10 py-3 rounded-full bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={!allRequired}
                   >
-                    Submit Reflection
+                    {allRequired ? 'Submit Reflection' : 'Complete form to continue'}
                   </button>
                 </div>
               </form>
@@ -275,23 +292,21 @@ export default function SelfReflection() {
                 Your Reflection Has Been Received
               </h3>
               <p className="text-gray-300 text-base leading-relaxed">
-                Thank you for taking time to reflect. 
-                A gentle email has been sent to acknowledge your reflection.
+                Thank you for taking time to reflect. A gentle email has been sent to acknowledge your reflection.
               </p>
               <p className="text-gray-400 text-sm italic">
-                If you'd like to explore a guided awareness session further, 
-                you can view detailed information on the next page.
+                If you'd like to explore a guided awareness session further, you can view detailed information on the next page.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
                 <a
                   href="/session-details"
-                  className="px-10 py-3 rounded-full bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition text-center"
+                  className="btn-primary"
                 >
                   View Session Details
                 </a>
                 <a
                   href="/"
-                  className="px-10 py-3 rounded-full border border-cyan-500 text-cyan-300 font-semibold hover:bg-cyan-900/30 transition text-center"
+                  className="btn-secondary"
                 >
                   Return Home
                 </a>
